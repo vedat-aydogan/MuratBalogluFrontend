@@ -1,0 +1,85 @@
+.contact-info ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+}
+
+.contact-info ul li span {
+        color: var(--dark-blue);
+        font-family: "OPS Bold";
+}
+
+.contact-info ul li {
+        padding: 3px 0;
+        border-bottom: 1px dashed #dedede;
+}
+
+.contact-info table tr td:first-child,
+.contact-info table tr td:nth-child(2) {
+        font-family: "OPS Bold";
+        padding-left: 0;
+        color: var(--dark-blue)
+}
+
+.mb-9 {
+        margin-bottom: 5rem !important
+}
+
+.mb-auto {
+        margin-bottom: auto !important
+}
+
+@media(min-width:576px) {
+        .mb-sm-9 {
+                margin-bottom: 5rem !important
+        }
+
+        .mb-sm-auto {
+                margin-bottom: auto !important
+        }
+}
+
+@media(min-width:768px) {
+        .mb-md-9 {
+                margin-bottom: 5rem !important
+        }
+
+        .mb-md-auto {
+                margin-bottom: auto !important
+        }
+}
+
+@media(min-width:992px) {
+        .mb-lg-9 {
+                margin-bottom: 5rem !important
+        }
+
+        .mb-lg-auto {
+                margin-bottom: auto !important
+        }
+}
+
+@media(min-width:1200px) {
+        .mb-xl-9 {
+                margin-bottom: 5rem !important
+        }
+
+        .mb-xl-auto {
+                margin-bottom: auto !important
+        }
+}
+
+@media(min-width:1400px) {
+        .mb-xxl-9 {
+                margin-bottom: 5rem !important
+        }
+
+        .mb-xxl-auto {
+                margin-bottom: auto !important
+        }
+}
+
+.table * {
+        background-color: transparent !important;
+        padding: 3px 0
+}

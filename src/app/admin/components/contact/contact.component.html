@@ -1,0 +1,123 @@
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">İletişim</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a routerLink="/admin">Anasayfa</a></li>
+                    <li class="breadcrumb-item active">İletişim</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+
+<div class="row">
+    <!-- left column -->
+    <div class="col-md-6">
+        <!-- general form elements -->
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">İletişim Bilgileri</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form [formGroup]="contactForm" (ngSubmit)="addContact()">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label>Cep Telefonu</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                            </div>
+                            <input type="tel" class="form-control" formControlName="mobile" placeholder="533 333 22 11">
+                            <div *ngIf="!mobile.valid"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-9">
+                                <label>Sabit / Randevu Telefonu 1</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                    </div>
+                                    <input type="tel" class="form-control" formControlName="fixedPhoneOne"
+                                        placeholder="444 3 222 / 0242 333 22 11">
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <label>Varsa Dahili Numara</label>
+                                <div class="input-group">
+                                    <input type="tel" class="form-control" formControlName="fixedPhoneOneExtension"
+                                        placeholder="0000">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-9">
+                                <label>Sabit / Randevu Telefonu 2</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                    </div>
+                                    <input type="tel" class="form-control" formControlName="fixedPhoneTwo"
+                                        placeholder="444 3 222 / 0242 333 22 11">
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <label>Varsa Dahili Numara</label>
+                                <div class="input-group">
+                                    <input type="tel" class="form-control" formControlName="fixedPhoneTwoExtension"
+                                        placeholder="0000">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>E-Posta Adresi</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                            </div>
+                            <input type="email" class="form-control" formControlName="email"
+                                placeholder="name@example.com">
+                            <div *ngIf="!email.valid"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Adres</label>
+                        <textarea class="form-control" formControlName="address" rows="3"
+                            placeholder="Adres giriniz ..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Google Haritası</label>
+                        <textarea class="form-control" formControlName="googleMap" rows="6"
+                            placeholder="Google haritalar için iframe giriniz ..."></textarea>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Ekle / Güncelle</button>
+                </div>
+            </form>
+            <!-- </form> -->
+        </div>
+        <!-- /.card -->
+    </div>
+    <!--/.col (left) -->
+
+    <!-- right column -->
+    <div class="col-md-6">
+        <app-working-hours></app-working-hours>
+    </div>
+    <!--/.col (right) -->
+</div>
+<!-- /.row -->

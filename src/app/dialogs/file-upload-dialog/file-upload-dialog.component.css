@@ -1,0 +1,8 @@
+.file-upload-dialog-button-row {
+    display: table-cell;
+    max-width: 600px;
+}
+
+.file-upload-dialog-button-row .mat-mdc-button-base {
+    margin: 8px 8px 8px 8px;
+}

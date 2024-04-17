@@ -1,0 +1,16 @@
+::ng-deep .mat-mdc-dialog-container .mdc-dialog__title {
+  color: #fff !important;
+}
+
+::ng-deep .ngx-file-drop__content * {
+  color: #fff !important
+}
+
+::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
+  background-color: #343a40;
+}
+
+::ng-deep .mat-mdc-button:not(:disabled) {
+  background-color: #b0bec5 !important;
+  color: #000000 !important;
+}

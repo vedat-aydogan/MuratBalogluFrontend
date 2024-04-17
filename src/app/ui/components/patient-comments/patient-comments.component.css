@@ -1,0 +1,30 @@
+.card-head{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-head-icon {
+  background-color: #70E493;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  text-align: right;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color:#fff;
+  font-size:24px;
+}
+
+.card-head-name {
+  font-family: "OPS Bold";
+  font-size: 1.1rem;
+
+}
+
+.card-head-title {
+  font-size: 1.1rem;
+  color: var(--dark-blue);
+  font-family: 'OPS Semibold';
+}

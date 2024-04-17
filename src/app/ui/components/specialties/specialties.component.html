@@ -1,0 +1,36 @@
+<section class="mySpecialties">
+  <div class="container">
+
+    <div class="row">
+      <div class="col-12">
+        <div class="section-sub-main-title">
+          UZMANLIKLARI
+        </div>
+        <div class="section-sub-title">
+          Tüm Uzmanlık Alanları
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-5">
+      <!-- CARD ITEM -->
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4" *ngFor="let speciality of specialityWithCardImage">
+        <a class="spc-card" routerLink="/uzmanlik/{{speciality.detailUrl}}">
+          <div class="spc-card-img">
+            @if (speciality.specialityImageFileId) {
+            <img src={{speciality.path}} alt={{speciality.title}}>
+            }@else {
+            <img src="assets/images/no-image.jpg" alt={{speciality.title}}>
+            }
+          </div>
+          <div class="spc-card-title">{{speciality.title}}</div>
+          <div class="spc-card-desc">{{speciality.cardContext}}...</div>
+          <div class="spc-card-link">
+            <span>DEVAMI</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>

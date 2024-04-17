@@ -1,0 +1,68 @@
+<section class="mySpecialtiesDetail">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-sub-main-title">
+                    UZMANLIK
+                </div>
+                <div class="section-sub-title">
+                    {{specialityDetail?.title}}
+                </div>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-sm-12 col-sm-12 col-md-8">
+                <div class="subpage-bg" [innerHTML]="specialityDetail?.context">
+                    <!-- <h3 class="subpage-title">Robotik diz protezi</h3>
+
+                    <p>Robotik diz protezi, geleneksel (normal) ameliyat yöntemlerine kıyasla doktorların çok daha
+                        hassas, milimetrik hesaplamalarla ve kontrollü olarak karmaşık cerrahi işlemleri yerine
+                        getirmesini sağlayan bilgisayar destekli sistemlerdir. </p>
+
+
+                    <h3 class="subpage-title">Robotik cerrahi nedir?</h3>
+
+                    <p>Robotik cerrahi ile yapılan ameliyatlar, sanılanın aksine, robot tarafından değil yine cerrahın
+                        kendisi tarafından gerçekleştirilir. Bir robotik cerrahi sistemi genel olarak robotik cihaza
+                        bağlı cerrahi aletler, 3-boyutlu görüntü elde etmeyi sağlayan görüntüleme sistemi ve
+                        bilgisayardan oluşur. Görüntüleme sistemiyle ameliyat bölgesinin 3-boyutlu modelleri elde
+                        edilerek doktora ayrıntılı bilgi sağlanırken, robotik cerrahi aletler ulaşılması zor alanlarda
+                        hassas işlemlerin kontrollü olarak yapılmasına yardımcı olur.</p>
+
+
+                    <h3 class="subpage-title">Robotik diz protezi ameliyatı nedir?</h3>
+
+                    <img class="my-3" src="assets/images/blog-images/Robotik-Cerrahi-ile-Diz-Protezi-Ameliyati-2.jpg"
+                        alt="">
+
+                    <p>Robotik cerrahi ile yapılan ameliyatlar, sanılanın aksine, robot tarafından değil yine cerrahın
+                        kendisi tarafından gerçekleştirilir. Bir robotik cerrahi sistemi genel olarak robotik cihaza
+                        bağlı cerrahi aletler, 3-boyutlu görüntü elde etmeyi sağlayan görüntüleme sistemi ve
+                        bilgisayardan oluşur. Görüntüleme sistemiyle ameliyat bölgesinin 3-boyutlu modelleri elde
+                        edilerek doktora ayrıntılı bilgi sağlanırken, robotik cerrahi aletler ulaşılması zor alanlarda
+                        hassas işlemlerin kontrollü olarak yapılmasına yardımcı olur.</p> -->
+                </div>
+            </div>
+
+            <div class="col-sm-12 col-sm-12 col-md-4">
+                <div class="subpage-bg subpage-link-list">
+                    <h3 class="subpage-title">TÜM UZMANLIKLAR</h3>
+                    <ul>
+                        <li *ngFor="let titleAndDetailUrl of specialityDetail?.titlesAndDetailUrls">
+                            <a routerLink="/uzmanlik/{{titleAndDetailUrl.detailUrl}}"
+                                (click)="urlChanged(titleAndDetailUrl.detailUrl)">
+                                <i class="fa-solid fa-chevron-right"></i>
+                                {{titleAndDetailUrl.title}}
+                            </a>
+                        </li>
+                        <!-- <li><a><i class="fa-solid fa-chevron-right"></i>Robotik Diz ve Kalça Protezi</a></li>
+                        <li><a><i class="fa-solid fa-chevron-right"></i>Boy Uzatma Ameliyatı</a></li>
+                        <li><a><i class="fa-solid fa-chevron-right"></i>Omuz, Diz ve Ayak Bileği Artroskopileri</a></li>
+                        <li><a><i class="fa-solid fa-chevron-right"></i>SVF ve ACP Uygulamaları</a></li>
+                        <li><a><i class="fa-solid fa-chevron-right"></i>Spor Yaralanmaları ve Tedavileri</a></li> -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

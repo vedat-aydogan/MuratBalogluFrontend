@@ -1,0 +1,35 @@
+<h2 mat-dialog-title>Hasta Yorumunu Düzenleyiniz</h2>
+<!-- form start -->
+<form [formGroup]="patientCommentUpdateForm" (ngSubmit)="updatePatientComment()">
+    <mat-dialog-content>
+        <div class="col-md-12">
+            <div class="card card-info">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label>Hasta Adı</label>
+                        <input type="text" class="form-control" formControlName="patientName"
+                            placeholder="Murat Baloğlu / Murat Bey / M....B / Mu*** B***">
+                    </div>
+                    <div class="form-group">
+                        <label>Hastalık</label>
+                        <input type="text" class="form-control" formControlName="disease"
+                            placeholder="Frozen Shoulder / Kırık / Diz Protezi Ameliyatı / Diz Ampütasyonu / Total Uyluk Protezi Ameliyatı ...">
+                    </div>
+                    <div class="form-group">
+                        <label>Hasta Yorumu</label>
+                        <textarea class="form-control" formControlName="patientReview" rows="6"
+                            placeholder="Hasta yorumu giriniz.">
+                    </textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-dialog-content>
+    <div mat-dialog-actions align="start">
+        <div>
+            <button mat-raised-button color="primary" type="submit" cdkFocusInitial>Kaydet</button>
+            <button mat-raised-button color="accent" mat-dialog-close>İptal</button>
+        </div>
+    </div>
+</form>
+<!-- </form> -->

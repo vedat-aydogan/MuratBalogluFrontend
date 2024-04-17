@@ -1,0 +1,42 @@
+<section class="video">
+  <div class="container relative">
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="section-head">
+          <div class="section-title">
+            Videolar
+          </div>
+          <a routerLink="/videolar" class="btn  btn-sm btn-view-all">
+            Tümünü Gör<i class="fa-solid fa-chevron-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-5">
+      <!-- CARD ITEM -->
+      <div class="col-sm-12 col-md-12 col-lg-6 col-xl-4" *ngFor="let video of videos">
+        <div class="video-card">
+          <div [innerHTML]="video.link | safe"></div>
+          <div class="video-title">
+            {{video.title}}
+          </div>
+        </div>
+      </div>
+      <!-- CARD ITEM -->
+      <!-- <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+        <div class="video-card">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/eg9de5I6fDE?si=cvmayeA-xvjpAr5C"
+            title="YouTube video player" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; "
+            allowfullscreen></iframe>
+          <div class="video-title">
+            Ön Çapraz Bağ Yaralanmalarının Belirtileri Nelerdir ?
+          </div>
+        </div>
+      </div> -->
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,248 @@
+footer {
+  background-color: var(--custom-blue);
+  padding: 50px 0 0 0;
+}
+
+.footer-logo {
+  max-width: 300px;
+}
+
+.footer-menu-head {
+  font-family: "OPS Bold";
+  font-size: 1rem;
+  color: #fff;
+  position: relative;
+  width: fit-content;
+}
+
+.footer-menu-head:after {
+  background-color: var(--light-blue);
+  content: "";
+  height: 4px;
+  position: absolute;
+  bottom: -10px;
+  width: 50%;
+  left: 0;
+}
+
+.footer-menu-list {
+  margin-top: 25px;
+}
+
+.footer-menu-list li {
+  border-bottom: 1px dashed #227ece;
+  color: #fff;
+}
+
+.footer-menu-list li a {
+  color: #fff;
+  font-size: 1rem;
+  padding: 5px 0;
+  display: inline-block;
+}
+
+.footer-menu-list li a:hover {
+  color: var(--light-blue)
+}
+
+.footer-menu-list li a i {
+  margin-right: 8px;
+  color: var(--light-blue)
+}
+
+.footer-social-media a {
+  color: var(--light-blue);
+  margin-right: 10px !important;
+  transition: .5s !important;
+  font-size: 1rem !important;
+}
+
+.footer-social-media a:hover {
+  color: #fff;
+
+}
+
+.copyright {
+  background-color: #0c2f49;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  color: #fff;
+}
+
+.copyright ul {
+  text-align: right;
+}
+
+.copyright ul li {
+  display: inline-block;
+}
+
+.copyright ul li a {
+  margin-left: 30px;
+  font-size: .95rem
+}
+
+.copyright ul li a.footer-text-link {
+  display: inline-block;
+  color: #fff;
+}
+
+.scrollTop {
+  width: 55px;
+  height: 55px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 135px;
+  right: 30px;
+  border-radius: 50%;
+  background-color: var(--light-blue);
+  opacity: .6;
+  cursor: pointer;
+  z-index: 100;
+}
+
+.scrollTop:hover {
+  opacity: 1
+}
+
+.scrollTop i {
+  color: #fff;
+  font-size: 30px;
+}
+
+.whatsapp-widget {
+  width: 55px;
+  height: 55px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 70px;
+  right: 30px;
+  border-radius: 50%;
+  background-color: #0e70c5;
+  opacity: .6;
+  cursor: pointer;
+  z-index: 100;
+}
+
+.whatsapp-widget:hover {
+  opacity: 1
+}
+
+.whatsapp-widget i {
+  color: #fff;
+  font-size: 20px;
+}
+
+.whatsapp-widget-panel {
+  /* background-color: #a8c2f1; */
+  background-color: var(--custom-blue);
+  -webkit-box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 8px;
+  position: fixed;
+  bottom: 50px;
+  right: 20px;
+  transition: .5s;
+  z-index: 99;
+  opacity: 0;
+  display: none;
+}
+
+.wwp-content {
+  position: relative;
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  padding: 20px 16px 30px 16px;
+}
+
+.wwp-close {
+  margin-left: auto;
+  display: flex;
+  justify-content: end;
+}
+
+.wwp-close i {
+  font-size: 20px;
+  color: #333
+}
+
+.wwp-close:hover i {
+  color: var(--custom-blue);
+  transition: .5s;
+}
+
+.wwp-link {
+  font-size: .9rem;
+  text-align: center;
+  line-height: 1.2rem;
+}
+
+.wpp-head {
+  padding: 20px 5px 10px 5px;
+  border-bottom: 1px dashed #a4d6bd;
+  font-family: "OPS Semibold";
+  font-size: 1rem;
+  color: #333;
+}
+
+.wwp-link ul {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 16px 0;
+  padding-left: 1rem;
+}
+
+.wwp-link ul li {
+  display: inline-flex;
+  vertical-align: middle;
+}
+
+.wwp-link a {
+  color: #272727;
+  transition: .5s;
+}
+
+.wwp-link a:hover {
+  color: var(--custom-blue);
+  transition: .5s;
+}
+
+.wwp-link ul li:nth-child(2) {
+  max-width: 130px;
+  text-align: left;
+  margin-left: 20px;
+}
+
+.wwp-link i {
+  font-size: 35px;
+  color: var(--custom-blue);
+}
+
+.acceptBtn {
+  cursor: pointer !important
+}
+
+#cerezModal .modal-header,
+#kvkkModal .modal-header {
+  background-color: var(--dark-blue);
+  color: #fff;
+}
+
+#cerezModal .btn-close,
+#kvkkModal .btn-close {
+  --bs-btn-close-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z'/%3e%3c/svg%3e");
+}
+
+footer ul {
+  list-style: none;
+  padding: 0;
+}

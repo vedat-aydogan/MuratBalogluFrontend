@@ -1,0 +1,40 @@
+.about-section {
+  background: url("/assets/images/about-images/about-bg.jpg") 70% top no-repeat;
+  background-size: cover;
+  font-size: 1rem;
+  line-height: 34px;
+}
+
+.about-section h2 {
+  font-family: "OPS Bold";
+  font-size: 1.6rem;
+  margin: 60px 0 30px 0;
+}
+
+.about-section h3 {
+  font-family: "OPS Bold";
+  font-size: 1.1rem;
+  margin: 30px 0 30px 0;
+}
+
+.text-bg {
+  background: rgb(255, 255, 255);
+  background: linear-gradient(29deg, rgba(255, 255, 255, 0) 55%, rgba(147, 147, 147, 0.4430147058823529) 100%);
+  border-radius: 10px;
+  padding: 100px 50px 50px 50px;
+}
+
+.btn-detail {
+  padding: 10px 20px;
+  font-size: .9rem;
+  -webkit-box-shadow: 1px 3px 6px 0px rgba(3, 34, 39, 0.4);
+  -moz-box-shadow: 1px 3px 6px 0px rgba(3, 34, 39, 0.4);
+  box-shadow: 1px 3px 6px 0px rgba(3, 34, 39, 0.4);
+  top: 0 !important;
+}
+
+@media (min-width:992px) {
+  .text-bg {
+    padding: 100px 50px 50px 50px;
+  }
+}

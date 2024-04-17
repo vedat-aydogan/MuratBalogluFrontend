@@ -1,0 +1,51 @@
+.about-detail-section {
+  background-size: cover;
+  font-size: 1rem;
+  line-height: 34px;
+}
+
+.about-detail-section h2 {
+  font-family: "OPS Bold";
+  font-size: 1.6rem;
+  margin: 0px 0 30px 0;
+}
+
+.about-detail-section h3 {
+  font-family: "OPS Bold";
+  font-size: 1.1rem;
+  margin: 0px 0 20px 0;
+}
+
+.text-bg {
+  background: rgb(255, 255, 255);
+  background: linear-gradient(29deg, rgba(255, 255, 255, 0) 55%, rgba(147, 147, 147, 0.4430147058823529) 100%);
+  border-radius: 10px;
+}
+
+.ac-row {
+  border-bottom: 1px solid #e5e5e5;
+  padding-top: 10px;
+}
+
+.academic-date {
+  font-family: "OPS Bold";
+  font-size: 1rem;
+}
+
+.academic-head {
+  font-family: "OPS Bold";
+  font-size: .9rem;
+}
+
+.academic-title {
+  font-size: .9rem;
+  padding-bottom: 10px;
+}
+
+.academic-list ul li {
+  list-style-type: disc;
+}
+
+.academic-list ul {
+  padding-left: 16px;
+}

@@ -1,0 +1,101 @@
+<!--------------------------  HEADER --------------------------------->
+<h1 class="main-h1">OP. Dr. Murat Baloğlu, Ortopedi ve Travmatoloji Uzmanlığı Antalya</h1>
+<header>
+  <div class="head-top">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-1 col-sm-1 col-md-1 col-lg-1 col-xl-2 col-xxl-2 ps-2 ps-sm-0">
+          <div class="row quick-menu">
+            <div class="col-2 d-flex align-items-center">
+              <a href="tel:+90{{mobileWithoutSpace}}"><i class="fa-solid fa-phone"></i></a>
+            </div>
+            <div class="col-10">
+              <div class="ht-item-head">Bize Ulaşın</div>
+              <div class="ht-item-text">
+                <a href="tel:+90{{mobileWithoutSpace}}">+90 {{contact?.mobile}} </a>
+              </div>
+              <!-- <div class="ht-item-text"><a href="tel:05336622902">+90 533 662 29 02</a></div> -->
+            </div>
+          </div>
+        </div>
+
+        <div class="col-1 col-sm-1 col-md-1 col-lg-1 col-xl-3  col-xxl-3  ps-2 ps-sm-0">
+          <div class="row quick-menu">
+            <div class="col-1 d-flex align-items-center">
+              <a href="mailto:{{contact?.email}}"><i class="fa-regular fa-envelope"></i></a>
+            </div>
+            <div class="col-11">
+              <div class="ht-item-head">E-Posta</div>
+              <div class="ht-item-text">
+                <a href="mailto:{{contact?.email}}">{{contact?.email}}</a>
+                <!-- <a href="mailto:op.dr.muratbaloglu&#64;gmail.com">op.dr.muratbaloglu&#64;gmail.com</a> -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-1 col-sm-1 col-md-1 col-lg-1 col-xl-3 col-xxl-4 ps-2 ps-sm-0 lg-hide">
+          <div class="row quick-menu ">
+            <div class="col-1 col-sm-1 col-md-1 col-lg-1 col-xl-2 col-xxl-1 d-flex align-items-center">
+              <a href="https://www.memorial.com.tr/doktorlar/murat-baloglu" target="_blank">
+                <i class="fa-solid fa-calendar-days"></i>
+              </a>
+              <!-- <i class="fa-solid fa-calendar-days"></i> -->
+            </div>
+            <div class="col-11 col-sm-11 col-md-11 col-lg-11 col-xl-10 col-xxl-11 px-0">
+              <a href="https://www.memorial.com.tr/doktorlar/murat-baloglu" target="_blank" class="ht-item-head">
+                Randevu İçin Tıklayın
+              </a>
+              <div class="ht-item-text">
+                <!-- <a href="tel:{{fixedPhoneOneWithoutSpace}}">{{contact?.fixedPhoneOne}} </a> -->
+                <a href="https://www.memorial.com.tr/doktorlar/murat-baloglu" target="_blank">
+                  {{contact?.fixedPhoneOne}}
+                </a>
+                @if(contact?.fixedPhoneOneExtension){(dahili {{contact?.fixedPhoneOneExtension}})}
+                @if(contact?.fixedPhoneTwo){ / }
+                <!-- <a href="tel:{{fixedPhoneTwoWithoutSpace}}">{{contact?.fixedPhoneTwo}} </a> -->
+                <a href="https://www.memorial.com.tr/doktorlar/murat-baloglu" target="_blank">
+                  {{contact?.fixedPhoneTwo}}
+                </a>
+                @if(contact?.fixedPhoneTwoExtension){(dahili {{contact?.fixedPhoneTwoExtension}})}
+              </div>
+              <!-- <div class="ht-item-text"><a href="tel:4447888">444 7 888</a> / <a href="tel:02423146666">0242 314 66 66</a> (dahili 5306)</div> -->
+            </div>
+          </div>
+        </div>
+
+        <div class="col-10 col-sm-10 col-md-10  col-lg-10 col-xl-4 col-xxl-3 text-end d-flex align-items-center">
+          <ul class="social-media ms-auto me-5">
+            <li>
+              <a [href]="socialMediaAccount?.youTube" target="_blank">
+                <i class="fa-brands fa-youtube"></i>
+              </a>
+            </li>
+            <li>
+              <a [href]="socialMediaAccount?.instagram" target="_blank">
+                <i class="fa-brands fa-instagram"></i>
+              </a>
+            </li>
+          </ul>
+
+          <div class="dropdown select-language">
+            <a class="dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <img *ngIf="!langTurkish" class="currentFlag" src="assets/images/tr.svg" width="26">
+              <img *ngIf="langTurkish" class="currentFlag" src="assets/images/en.svg" width="26">
+            </a>
+            <!-- <ul class="dropdown-menu" (click)="toggleFlag()">
+              <li *ngIf="!langTurkish"><a class="dropdown-item"><img src="assets/images/tr.svg" width="26"></a></li>
+              <li *ngIf="langTurkish"><a class="dropdown-item"><img src="assets/images/en.svg" width="26"></a></li>
+            </ul> -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <app-navbar></app-navbar>
+
+</header>
+<!-- HEADER FINISH -->

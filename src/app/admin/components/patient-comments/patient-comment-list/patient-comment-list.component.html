@@ -1,0 +1,52 @@
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Hasta Yorumları > Hasta Yorumlarını Listele</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a routerLink="/admin">Anasayfa</a></li>
+                    <li class="breadcrumb-item active">Hasta Yorumları > Hasta Yorumlarını Listele</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+
+<section class="patients-comments">
+    <div class="container">
+
+        <!-- ITEM -->
+        @for (patientComment of patientComments; track patientComment) {
+        <div class="card pe-4 py-3 my-4">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-1 card-head">
+                        <div class="card-head-icon">
+                            <i class="fa-regular fa-thumbs-up"></i>
+                        </div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="card-head-name">{{patientComment.patientName}}</div>
+                        <div class="card-head-title mb-2">{{patientComment.disease}}</div>
+                        <div>{{patientComment.patientReview}}</div>
+                    </div>
+                </div>
+                <br>
+                <button type="button" class="btn btn-danger card-link btn-sm"
+                    (click)="deletePatientComment(patientComment.id)">
+                    <i class="fas fa-trash me-2"></i>Sil
+                </button>
+                <button type="button" class="btn btn-info card-link btn-sm"
+                    (click)="updatePatientComment(patientComment)">
+                    <i class="fas fa-pencil-alt me-2"></i>Düzenle
+                </button>
+            </div>
+        </div>
+        }
+
+    </div>
+</section>

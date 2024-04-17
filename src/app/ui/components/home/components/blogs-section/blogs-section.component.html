@@ -1,0 +1,41 @@
+<section class="blog">
+  <div class="container relative">
+    <div class="row">
+      <div class="col-12">
+        <div class="section-head">
+          <div class="section-title">
+            Blog Yazıları
+          </div>
+          <a routerLink="/bloglar" class="btn btn-sm btn-view-all">
+            Tümünü Gör<i class="fa-solid fa-chevron-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-5">
+      <!-- CARD ITEM -->
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4" *ngFor="let blog of blogWithCardImage">
+        <div class="blog-card">
+          <div class="blog-card-img">
+            @if (blog.blogImageFileId) {
+            <img src={{blog.path}} alt={{blog.title}}>
+            }@else {
+            <img src="assets/images/no-image.jpg" alt={{blog.title}}>
+            }
+          </div>
+          <div class="blog-date"><i class="fa-solid fa-calendar-days"></i> {{blog.createdDate | date:
+            "dd.MM.YYYY"}}
+          </div>
+          <div class="blog-card-title">{{blog.title}}</div>
+          <div class="blog-card-desc">{{blog.cardContext}}...</div>
+
+          <a routerLink="/blog/{{blog.detailUrl}}" class="btn btn-dark btn-sm">
+            Devamını Oku
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>

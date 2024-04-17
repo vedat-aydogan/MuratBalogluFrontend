@@ -1,0 +1,66 @@
+.video-card {
+    background-color: #fff;
+    padding: 20px 20px 5px 20px;
+    border: 1px solid #d4d4d4;
+    border-radius: 10px;
+    margin-bottom: 25px;
+}
+
+.video-card iframe {
+    height: 100% !important;
+    min-height: 280px;
+    width: 100% !important;
+}
+
+.video-title {
+    font-family: "OPS Bold";
+    color: var(--dark-blue);
+    text-align: center;
+    font-size: 1rem;
+    min-height: 60px;
+    line-height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ytp-title-text {
+    display: none !important;
+}
+
+
+
+
+.collapse-btn{
+    color:white!important;
+    position: relative;
+    cursor:pointer
+}
+.collapse-btn h5{
+    line-height: 30px;
+}
+
+.collapse-btn[data-toggle].collapsed:after {
+    font-family: "Font Awesome 5 Free"; 
+    font-weight: 900; 
+    content: "\f077"; 
+    color:  #fff;
+    position: absolute;
+    right: 20px;
+    top:15px;
+}
+.collapse-btn[data-toggle]:not(.collapsed):after {
+    font-family: "Font Awesome 5 Free"; 
+    font-weight: 900; 
+    content: "\f078"; 
+
+    color:  #fff;
+    position: absolute;
+    right: 20px;
+    top:15px;
+}
+@media (min-width:768px) and (max-width:992px) {
+    .video-card iframe {
+        min-height: 200px;
+    }
+}

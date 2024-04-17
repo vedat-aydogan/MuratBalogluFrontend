@@ -1,0 +1,36 @@
+<section class="patients-comments">
+  <div class="container">
+
+    <div class="row">
+      <div class="col-12">
+        <div class="section-sub-main-title">
+          YORUMLAR
+        </div>
+        <div class="section-sub-title">
+          Hasta Yorumları
+        </div>
+      </div>
+    </div>
+
+    <!-- ITEM -->
+    @for (patientComment of patientComments; track patientComment) {
+    <div class="card pe-4 py-3 my-4">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-1 card-head">
+            <div class="card-head-icon">
+              <i class="fa-regular fa-thumbs-up"></i>
+            </div>
+          </div>
+          <div class="col-md-11">
+            <div class="card-head-name">{{patientComment.patientName}}</div>
+            <div class="card-head-title mb-2">{{patientComment.disease}}</div>
+            <div>{{patientComment.patientReview}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    }
+
+  </div>
+</section>

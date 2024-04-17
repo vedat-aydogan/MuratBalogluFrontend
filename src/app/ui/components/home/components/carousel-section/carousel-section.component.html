@@ -1,0 +1,95 @@
+<owl-carousel-o [options]="customOptions" class="main-carousel">
+    @for (carouselImage of carouselImages; track carouselImage; let i = $index) {
+    <ng-template carouselSlide>
+        <div class="carousel-caption d-none d-md-block">
+            <div>Op. Dr. Murat Baloğlu</div>
+            <h2>Ortopedi ve <br>Travmatoloji Uzmanlığı</h2>
+            <p>Ortopedi ve travmatolojide, travma cerrahisi, kırık ve çıkıklar gibi akut travmatik yaralanmaların
+                tedavisi.
+            </p>
+            <a class="btn btn-dark brd-lblue btn-detail" routerLink="/uzmanliklari">Detaylı Bilgi</a>
+        </div>
+        <img src={{carouselImage.path}} alt="Ortopedi ve Travmatoloji Uzmanlığı">
+    </ng-template>
+    }@empty {
+    <ng-template carouselSlide>
+        <div class="carousel-caption d-none d-md-block">
+            <div>Op. Dr. Murat Baloğlu</div>
+            <h2>Ortopedi ve <br>Travmatoloji Uzmanlığı</h2>
+            <p>Ortopedi ve travmatolojide, travma cerrahisi, kırık ve çıkıklar gibi akut travmatik yaralanmaların
+                tedavisi.
+            </p>
+            <a class="btn btn-dark brd-lblue btn-detail" routerLink="/uzmanliklari">Detaylı Bilgi</a>
+        </div>
+        <img src="assets/images/no-image.jpg" alt="Ortopedi ve Travmatoloji Uzmanlığı" height="574px">
+    </ng-template>
+    }
+</owl-carousel-o>
+
+<!-- <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        @if (carouselImagesCount > 1) {
+        @for (carouselImage of carouselImages; track carouselImage; let i = $index) {
+        @if (i == 0) {
+        <button type="button" data-bs-target="#carouselExampleAutoplaying" attr.data-bs-slide-to="{{i}}" class="active"
+            aria-current="true" attr.aria-label="Slide {{i+1}}">
+        </button>
+        }@else {
+        <button type="button" data-bs-target="#carouselExampleAutoplaying" attr.data-bs-slide-to="{{i}}"
+            attr.aria-label="Slide {{i+1}}">
+        </button>
+        }
+        }
+        }
+    </div>
+    <div class="carousel-inner">
+        @for (carouselImage of carouselImages; track carouselImage; let i = $index) {
+        @if (i == 0) {
+        <div class="carousel-item active" data-bs-interval="8000" [ngStyle]="{'background-image': ' url(' + carouselImage.path  + ')'}">
+            <img class="d-none w-100" src={{carouselImage.path}} alt="Ortopedi ve Travmatoloji Uzmanlığı">
+            <div class="carousel-caption d-none d-md-block">
+                <div>Op. Dr. Murat Baloğlu</div>
+                <h2>Ortopedi ve <br>Travmatoloji Uzmanlığı</h2>
+                <p>Ortopedi ve travmatolojide, travma cerrahisi, kırık ve çıkıklar gibi akut travmatik yaralanmaların
+                    tedavisi.</p>
+                <a class="btn btn-dark brd-lblue btn-detail" routerLink="/uzmanliklarim">Detaylı Bilgi</a>
+            </div>
+        </div>
+        }@else {
+        <div class="carousel-item" data-bs-interval="8000" [ngStyle]="{'background-image': ' url(' + carouselImage.path  + ')'}">
+            <img src={{carouselImage.path}} class="d-none w-100" alt="Ortopedi ve Travmatoloji Uzmanlığı">
+            <div class="carousel-caption d-none d-md-block">
+                <div>Op. Dr. Murat Baloğlu</div>
+                <h2>Ortopedi ve <br>Travmatoloji Uzmanlığı</h2>
+                <p>Ortopedi ve travmatolojide, travma cerrahisi, kırık ve çıkıklar gibi akut travmatik yaralanmaların
+                    tedavisi.</p>
+                <a class="btn btn-dark brd-lblue btn-detail" routerLink="/uzmanliklarim">Detaylı Bilgi</a>
+            </div>
+        </div>
+        }
+        }@empty {
+        <div class="carousel-item active" data-bs-interval="8000" style="background-color: #e2e2e2;">
+            <img src="" class="d-none w-100" alt="Ortopedi ve Travmatoloji Uzmanlığı">
+            <div class="carousel-caption d-none d-md-block">
+                <div>Op. Dr. Murat Baloğlu</div>
+                <h2>Ortopedi ve <br>Travmatoloji Uzmanlığı</h2>
+                <p>Ortopedi ve travmatolojide, travma cerrahisi, kırık ve çıkıklar gibi akut travmatik yaralanmaların
+                    tedavisi.</p>
+                <a class="btn btn-dark brd-lblue btn-detail" routerLink="/uzmanliklarim">Detaylı Bilgi</a>
+            </div>
+        </div>
+        }
+    </div>
+    @if (carouselImagesCount > 1) {
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
+        data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
+        data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+    }
+</div> -->

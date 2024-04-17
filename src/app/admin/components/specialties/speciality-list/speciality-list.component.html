@@ -1,0 +1,56 @@
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Uzmanlıklarım > Uzmanlıklarımı Listele</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a routerLink="/admin">Anasayfa</a></li>
+                    <li class="breadcrumb-item active">Uzmanlıklarım > Uzmanlıklarımı Listele</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+
+<section class="mySpecialties">
+    <div class="container-fluid">
+        <div class="row mt-0">
+
+            <!-- CARD ITEM -->
+            <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" *ngFor="let speciality of specialityWithCardImage">
+                <div class="spc-card">
+                    <div class="spc-card-img">
+                        @if (speciality.specialityImageFileId) {
+                        <img style="cursor: pointer;" src={{speciality.path}} alt={{speciality.title}}
+                            (click)="addSpecialityImage(speciality.id, speciality.title)">
+                        }@else {
+                        <!-- <img style="cursor: pointer;" src="assets/images/no-image.jpg" -->
+                        <img style="cursor: pointer;" src="assets/images/file-add-image.jpeg"
+                            (click)="addSpecialityImage(speciality.id, speciality.title)">
+                        }
+                    </div>
+                    <div class="spc-card-title">{{speciality.title}}</div>
+                    <div class="spc-card-desc">{{speciality.cardContext}}...</div>
+
+                    <button type="button" class="btn btn-danger card-link btn-sm"
+                        (click)="deleteSpeciality(speciality.id)">
+                        <i class="fas fa-trash me-2"></i>Sil
+                    </button>
+                    <button type="button" class="btn btn-info card-link btn-sm"
+                        routerLink="/admin/speciality-update/{{speciality.id}}">
+                        <i class="fas fa-pencil-alt me-2"></i>Düzenle
+                    </button>
+                    <!-- <button type="button" class="btn btn-primary card-link btn-sm"
+                        (click)="uploadSpecialityImages(speciality.id,speciality.title)">
+                        <i class="fas fa-pencil-alt"></i>Uzmanlık Resimleri
+                    </button> -->
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

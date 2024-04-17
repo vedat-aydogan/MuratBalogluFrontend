@@ -1,0 +1,55 @@
+<section class="patients-comments">
+  <div class="container relative">
+    <div class="row">
+      <div class="col-12">
+        <div class="section-head">
+          <div class="section-title text-white">
+            Hasta Yorumları
+          </div>
+          <a routerLink="/hasta-yorumlari" class="btn btn-sm btn-view-all-blue cst-view">
+            Tümünü Gör<i class="fa-solid fa-chevron-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-5">
+      <div class="col-12">
+        <owl-carousel-o [options]="customOptions" class="patient-comments-carousel">
+          @for (patientComment of patientComments; track patientComment; let i = $index) {
+          <!-- ITEM -->
+          <ng-template carouselSlide>
+            <div class="card">
+              <div class="card-head">
+                <div class="row">
+                  <div class="col-2">
+                    <div class="min">
+                      <div class="card-head-icon">
+                        <i class="fa-regular fa-thumbs-up"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-10 ps-4">
+                    <div class="card-head-name ps-2">{{patientComment.patientName}}</div>
+                    <div class="card-head-title ps-2">{{patientComment.disease}}</div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="card-body-text">
+                  <i class="fa-solid fa-quote-left"></i>
+                  @if (patientComment.patientReview.length > 264) {
+                  {{patientComment.patientReview.substring(0,261)}}...
+                  }@else {
+                  {{patientComment.patientReview}}
+                  }
+                  <i class="fa-solid fa-quote-right"></i>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+          }
+        </owl-carousel-o>
+      </div>
+    </div>
+  </div>
+</section>

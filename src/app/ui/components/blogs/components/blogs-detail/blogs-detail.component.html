@@ -1,0 +1,42 @@
+<section class="myBlogsDetail">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-sub-main-title">
+                    BLOG
+                </div>
+                <div class="section-sub-title">
+                    {{blogDetail?.title}}
+                    <!-- Diz Protezi Ameliyatı Nasıl Yapılır? -->
+                </div>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-sm-12 col-sm-12 col-md-8">
+                <div class="subpage-bg" [innerHTML]="blogDetail?.context">
+                    <!-- <h3 class="subpage-title">Diz Protezi Ameliyatı Nasıl Yapılır?</h3>
+
+                    <img class="my-3" src="assets/images/blog-images/robotik-diz-ve-kalca-cerrahisi.jpg" alt="">
+                    <p>Diz artroplastisi, geleneksel ameliyat yöntemi ve robotik diz protezi ameliyatı olmak üzere iki
+                        şekilde uygulanabilir. Geleneksel diz protezi ameliyatı, standart cerrahi el aletler ve ekipman
+                        kullanarak manuel olarak gerçekleştirilir. Ancak cerrahi teknik ve alet yetersizliği ile ilgili
+                        sorunlar nedeniyle, deneyimli bir cerrah bile bazen protezin tam milimetrik kesi ile
+                        yerleştirilmesini sağlayamayabilir.</p> -->
+                </div>
+            </div>
+
+            <div class="col-sm-12 col-sm-12 col-md-4">
+                <div class="subpage-bg subpage-link-list">
+                    <h3 class="subpage-title">TÜM BLOG YAZILARI</h3>
+                    <ul>
+                        <li *ngFor="let titleAndDetailUrl of blogDetail?.titlesAndDetailUrls">
+                            <a routerLink="/blog/{{titleAndDetailUrl.detailUrl}}"
+                                (click)="urlChanged(titleAndDetailUrl.detailUrl)"><i
+                                    class="fa-solid fa-chevron-right"></i>{{titleAndDetailUrl.title}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
