@@ -14,6 +14,16 @@ export class ReloadService {
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
       this.router.navigate([currentRouteUrl]);
     });
+
+    return true;
+  }
+
+  async reloadAsync(): Promise<boolean> {
+    let currentRouteUrl = this.router.url;
+    await this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([currentRouteUrl]);
+    });
+
     return true;
   }
 

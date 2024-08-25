@@ -3,10 +3,10 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dial
 import { PatientCommentModel } from '../../contracts/models/patient-comment-model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { AlertifyService, MessageType, Position } from '../../services/admin/alertify.service';
 import { PatientCommentService } from '../../services/common/models/patient-comment.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ReloadService } from '../../services/common/reload.service';
+import { CustomToastrService, ToastrMessageType, ToastrPosition } from '../../services/common/custom-toastr-service';
 
 @Component({
   selector: 'app-patient-comment-update-dialog',
@@ -20,7 +20,7 @@ export class PatientCommentUpdateDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<PatientCommentUpdateDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: PatientCommentModel,
     private formbuilder: FormBuilder,
     private spinnerService: NgxSpinnerService,
-    private alertifyService: AlertifyService,
+    private toastrService: CustomToastrService,
     private patientCommentService: PatientCommentService,
     private reloadService: ReloadService
   ) { }
@@ -53,28 +53,29 @@ export class PatientCommentUpdateDialogComponent implements OnInit {
 
           this.reloadService.reload();
 
-          this.alertifyService.message("Hasta Yorumu başarılı bir şekilde güncellenmiştir.", {
-            dismissOthers: true,
-            messageType: MessageType.Success,
-            position: Position.TopRight
+          this.toastrService.message("Güncelleme işlemi gerçekleşmiştir", "Başarılı", {
+            messageType: ToastrMessageType.Success,
+            position: ToastrPosition.TopCenter,
+            timeOut: 4000
           });
         },
         error: (error: HttpErrorResponse) => {
-          this.spinnerService.hide();
+          if ((error.status != 401) && (error.status != 403) && (error.status != 500)) {
+            this.spinnerService.hide();
 
-          this.alertifyService.message(error.error, {
-            dismissOthers: true,
-            messageType: MessageType.Error,
-            position: Position.TopRight
-          });
+            this.toastrService.message(error.error.message, "Hata!", {
+              messageType: ToastrMessageType.Error,
+              position: ToastrPosition.TopCenter,
+              timeOut: 4000
+            });
+          }
         }
       });
     } else {
-      this.alertifyService.message("Hiç bir alan boş bırakılamaz ...", {
-        dismissOthers: true,
-        messageType: MessageType.Error,
-        position: Position.TopCenter,
-        delay: 5
+      this.toastrService.message("Hiç bir alan boş bırakılamaz ...", "Hata!", {
+        messageType: ToastrMessageType.Error,
+        position: ToastrPosition.TopCenter,
+        timeOut: 4000
       });
     }
   }

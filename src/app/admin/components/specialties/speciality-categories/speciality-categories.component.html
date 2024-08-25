@@ -1,0 +1,105 @@
+<!-- Content Header (Page header) -->
+<div class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1 class="m-0">Uzmanlık Kategorileri</h1>
+      </div><!-- /.col -->
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a routerLink="/admin">Anasayfa</a></li>
+          <li class="breadcrumb-item active">Uzmanlık Kategorileri</li>
+        </ol>
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
+</div>
+
+<!-- left column -->
+<div class="col-md-12">
+  <!-- general form elements -->
+  <div class="card card-info">
+    <div class="card-header">
+      <h3 class="card-title">Uzmanlık Kategorisi Ekleyiniz</h3>
+    </div>
+    <!-- /.card-header -->
+    <!-- form start -->
+    <form [formGroup]="specialityCategoryForm" (ngSubmit)="addSpecialityCategory()">
+      <div class="card-body">
+        <div class="form-group">
+          <label>Kategori Adı</label>
+          <input type="text" class="form-control" formControlName="name"
+            placeholder="Diz Cerrahisi / Kalça Cerrahisi / İğne Tedavileri"
+            [ngClass]="{'is-invalid':submitted && component.name.errors}">
+          <small class="invalid-feedback" *ngIf="submitted && component.name.errors?.required">
+            Kategori adını giriniz
+          </small>
+        </div>
+      </div>
+      <!-- /.card-body -->
+      <div class="card-footer">
+        <button type="submit" class="btn btn-info">Ekle</button>
+      </div>
+      <!-- /.card-footer -->
+    </form>
+    <!-- </form> -->
+  </div>
+  <!-- /.card -->
+</div>
+<br>
+
+<!-- <div class="row"> -->
+<div class="col-12">
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">Uzmanlık Kategorileri</h3>
+
+      <!-- <div class="card-tools">
+            <div class="input-group input-group-sm" style="width: 150px;">
+              <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+              <div class="input-group-append">
+                <button type="submit" class="btn btn-default">
+                  <i class="fas fa-search"></i>
+                </button>
+              </div>
+            </div>
+          </div> -->
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body table-responsive p-0">
+      <table class="table table-hover text-nowrap">
+        <thead>
+          <tr>
+            <th>Kategori Adı</th>
+            <th style="width: 40px"></th>
+            <th style="width: 40px"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (specialityCategory of specialityCategories; track specialityCategory) {
+          <tr>
+            <td>{{specialityCategory.name}}</td>
+            <td>
+              <button type="button" class="btn btn-info card-link btn-sm"
+                (click)="updateSpecialityCategory(specialityCategory)">
+                <i class="fas fa-pencil-alt me-2"></i>Düzenle
+              </button>
+            </td>
+            <td>
+              <button type="button" class="btn btn-danger card-link btn-sm"
+                (click)="deleteSpecialityCategory(specialityCategory.id)">
+                <i class="fas fa-trash me-2"></i>Sil
+              </button>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    <!-- /.card-body -->
+  </div>
+  <!-- /.card -->
+</div>
+<!-- </div> -->
+<!-- /.row -->

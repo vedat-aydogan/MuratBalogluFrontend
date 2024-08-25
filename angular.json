@@ -34,15 +34,14 @@
             ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              "src/favicon.ico",
+              "src/favicon.png",
               "src/assets"
             ],
             "styles": [
               "@angular/material/prebuilt-themes/pink-bluegrey.css",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",              
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
-              "node_modules/alertifyjs/build/css/alertify.min.css",
-              "node_modules/alertifyjs/build/css/themes/semantic.min.css",
+              "node_modules/ngx-toastr/toastr.css",
               "node_modules/ngx-spinner/animations/ball-spin-clockwise-fade.css",
               "node_modules/ngx-spinner/animations/line-spin-fade-rotating.css",
               "src/styles.css",
@@ -55,8 +54,7 @@
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
               "src/assets/admin/js/bootstrap.bundle.min.js",
               "src/assets/admin/js/adminlte.min.js",
-              "src/assets/js/script.js",
-              "node_modules/alertifyjs/build/alertify.min.js"
+              "src/assets/js/script.js"
             ],
             "server": "src/main.server.ts",
             "prerender": true,

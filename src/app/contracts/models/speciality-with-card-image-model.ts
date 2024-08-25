@@ -3,6 +3,7 @@ export class SpecialityWithCardImageModel {
     title: string;
     context: string;
     cardContext: string;
+    categoryName: string;
     detailUrl: string;
     // createdDate: Date; 
     specialityImageFileId: string;

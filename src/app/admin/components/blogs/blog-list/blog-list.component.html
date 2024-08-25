@@ -1,65 +1,64 @@
 <!-- Content Header (Page header) -->
 <div class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1 class="m-0">Bloglar > Blogları Listele</h1>
-            </div><!-- /.col -->
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a routerLink="/admin">Anasayfa</a></li>
-                    <li class="breadcrumb-item active">Bloglar > Blogları Listele</li>
-                </ol>
-            </div><!-- /.col -->
-        </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1 class="m-0">Tüm Bloglar</h1>
+      </div><!-- /.col -->
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a routerLink="/admin">Anasayfa</a></li>
+          <li class="breadcrumb-item active">Tüm Bloglar</li>
+        </ol>
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
 </div>
 <!-- /.content-header -->
 
 <section class="blog">
-    <div class="container-fluid">
-        <!-- <div class="row">
+  <div class="container-fluid">
+    <!-- <div class="row">
             <div class="col-12">
                 <div class="section-title">
                     Blog Yazıları
                 </div>
             </div>
         </div> -->
-        <div class="row mt-0">
+    <div class="row mt-0">
 
-            <!-- CARD ITEM -->
-            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3" *ngFor="let blog of blogWithCardImage">
-                <div class="blog-card">
-                    <div class="blog-card-img">
-                        @if (blog.blogImageFileId) {
-                        <img style="cursor: pointer;" src={{blog.path}} alt={{blog.title}}
-                            (click)="addBlogImage(blog.id, blog.title)">
-                        }@else {
-                        <!-- <img style="cursor: pointer;" src="assets/images/no-image.jpg" -->
-                        <img style="cursor: pointer;" src="assets/images/file-add-image.jpeg"
-                            (click)="addBlogImage(blog.id, blog.title)">
-                        }
-                    </div>
-                    <div class="blog-date"><i class="fa-solid fa-calendar-days"></i> {{blog.createdDate | date:
-                        "dd.MM.YYYY"}}</div>
-                    <div class="blog-card-title">{{blog.title}}</div>
-                    <div class="blog-card-desc">{{blog.cardContext}}...</div>
-                    <!-- <div class="blog-card-link">
+      <!-- CARD ITEM -->
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4" *ngFor="let blog of blogWithCardImage">
+        <div class="blog-card">
+          <div class="blog-card-img">
+            @if (blog.blogImageFileId) {
+            <img style="cursor: pointer;" src={{blog.path}} alt={{blog.title}}
+              (click)="addBlogImage(blog.id, blog.title)">
+            }@else {
+            <!-- <img style="cursor: pointer;" src="assets/images/no-image.jpg" -->
+            <img style="width:60%; margin:0 auto; display: flex; cursor: pointer;"
+              src="assets/images/file-add-image.jpeg" (click)="addBlogImage(blog.id, blog.title)">
+            }
+          </div>
+          <div class="blog-date"><i class="fa-solid fa-calendar-days"></i> {{blog.createdDate | date:
+            "dd.MM.YYYY"}}</div>
+          <div class="blog-card-title">{{blog.title}}</div>
+          <div class="blog-card-desc">{{blog.cardContext}}...</div>
+          <!-- <div class="blog-card-link">
                         <a class="btn btn-dark" routerLink="/blog/{{blog.detailUrl}}">Devamını oku</a>
                     </div> -->
-                    <button type="button" class="btn btn-danger card-link btn-sm" (click)="deleteBlog(blog.id)">
-                        <i class="fas fa-trash me-2"></i>Sil
-                    </button>
-                    <button type="button" class="btn btn-info card-link btn-sm"
-                        routerLink="/admin/blog-update/{{blog.id}}">
-                        <i class="fas fa-pencil-alt me-2"></i>Düzenle
-                    </button>
-                    <!-- <button type="button" class="btn btn-primary btn-sm" (click)="uploadBlogImages(blog.id,blog.title)">
+          <button type="button" class="btn btn-danger card-link btn-sm" (click)="deleteBlog(blog.id)">
+            <i class="fas fa-trash me-2"></i>Sil
+          </button>
+          <button type="button" class="btn btn-info card-link btn-sm" routerLink="/admin/blog-update/{{blog.id}}">
+            <i class="fas fa-pencil-alt me-2"></i>Düzenle
+          </button>
+          <!-- <button type="button" class="btn btn-primary btn-sm" (click)="uploadBlogImages(blog.id,blog.title)">
                         <i class="fas fa-pencil-alt"></i>Blog Resimleri
                     </button> -->
-                </div>
-            </div>
-
         </div>
+      </div>
+
     </div>
+  </div>
 </section>

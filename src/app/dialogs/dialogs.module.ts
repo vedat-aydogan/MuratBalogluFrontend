@@ -11,6 +11,15 @@ import { SpecialityImageAddDialogComponent } from './speciality-image-add-dialog
 import { SpecialityImageListDialogComponent } from './speciality-image-list-dialog/speciality-image-list-dialog.component';
 import { PatientCommentUpdateDialogComponent } from './patient-comment-update-dialog/patient-comment-update-dialog.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SpecialityCategoryUpdateDialogComponent } from './speciality-category-update-dialog/speciality-category-update-dialog.component';
+import { NewsImageAddDialogComponent } from './news-image-add-dialog/news-image-add-dialog.component';
+import { NewsUpdateDialogComponent } from './news-update-dialog/news-update-dialog.component';
+import { AuthorizeMenuDialogComponent } from './authorize-menu-dialog/authorize-menu-dialog.component';
+import { MatBadgeModule } from '@angular/material/badge';
+import { RoleUpdateDialogComponent } from './role-update-dialog/role-update-dialog.component';
+import { MatListModule } from '@angular/material/list';
+import { AuthorizeUserDialogComponent } from './authorize-user-dialog/authorize-user-dialog.component';
+import { UserUpdateDialogComponent } from './user-update-dialog/user-update-dialog.component';
 
 
 
@@ -22,14 +31,23 @@ import { ReactiveFormsModule } from '@angular/forms';
     BlogImageListDialogComponent,
     SpecialityImageAddDialogComponent,
     SpecialityImageListDialogComponent,
-    PatientCommentUpdateDialogComponent
+    PatientCommentUpdateDialogComponent,
+    SpecialityCategoryUpdateDialogComponent,
+    NewsImageAddDialogComponent,
+    NewsUpdateDialogComponent,
+    AuthorizeMenuDialogComponent,
+    RoleUpdateDialogComponent,
+    AuthorizeUserDialogComponent,
+    UserUpdateDialogComponent    
   ],
   imports: [
     CommonModule,
     MatDialogModule,
     MatButtonModule,
     FileUploadModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatBadgeModule,
+    MatListModule
   ]
 })
 export class DialogsModule { }

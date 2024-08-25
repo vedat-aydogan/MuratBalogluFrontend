@@ -1,0 +1,104 @@
+<!-- Content Header (Page header) -->
+<div class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1 class="m-0">Basından</h1>
+      </div><!-- /.col -->
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a routerLink="/admin">Anasayfa</a></li>
+          <li class="breadcrumb-item active">Basından</li>
+        </ol>
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+
+<!-- form start -->
+<form [formGroup]="newsForm" (ngSubmit)="addNews()">
+  <!-- left column -->
+  <div class="col-md-12">
+    <!-- general form elements -->
+    <div class="card card-primary">
+      <div class="card-header">
+        <h3 class="card-title mb-0">Haber Ekleyiniz</h3>
+      </div>
+      <!-- /.card-header -->
+      <div class="card-body">
+        <div class="form-group">
+        </div>
+        <div class="form-group">
+          <label>Haber Başlığı</label>
+          <input type="text" class="form-control" formControlName="title"
+            placeholder="Haber için başlık giriniz. Boş bırakılamaz ..."
+            [ngClass]="{'is-invalid':submitted && component.title.errors}">
+          <small class="invalid-feedback" *ngIf="submitted && component.title.errors?.required">
+            Haber Başlığı giriniz.
+          </small>
+        </div>
+        <div class="form-group">
+          <label>Haber Linki</label>
+          <input type="text" class="form-control" formControlName="link"
+            placeholder="https://www.memorial.com.tr/doktorlar/murat-baloglu"
+            [ngClass]="{'is-invalid':submitted && component.link.errors}">
+          <small class="invalid-feedback" *ngIf="submitted && component.link.errors?.required">
+            Haber Linki giriniz.
+          </small>
+        </div>
+      </div>
+      <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+  </div>
+  <div class="col-md-4 ms-auto">
+    <button type="submit" class="btn btn-block bg-gradient-dark btn-lg">Kaydet</button>
+  </div>
+</form>
+<!-- </form> -->
+
+<section class="blog">
+  <div class="container-fluid">
+    <!-- <div class="row">
+            <div class="col-12">
+                <div class="section-title">
+                    Blog Yazıları
+                </div>
+            </div>
+        </div> -->
+    <div class="row mt-0">
+
+      <!-- CARD ITEM -->
+      @for (news of newsWithCardImageList; track news) {
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+        <div class="blog-card">
+          <div class="blog-card-img">
+            @if (news.newsImageFileId) {
+            <img style="cursor: pointer;" src={{news.path}} alt={{news.title}}
+              (click)="addNewsImage(news.id, news.title)">
+            }@else {
+            <!-- <img style="cursor: pointer;" src="assets/images/no-image.jpg" -->
+            <img style="width:60%; margin:0 auto; display: flex; cursor: pointer;"
+              src="assets/images/file-add-image.jpeg" (click)="addNewsImage(news.id, news.title)">
+            }
+          </div>
+          <div class="blog-date"><i class="fa-solid fa-calendar-days"></i> {{news.createdDate | date:
+            "dd.MM.YYYY"}}
+          </div>
+          <a [href]="news?.link" target="_blank">
+            <div class="blog-card-title">{{news.title}}</div>
+          </a>
+          <button type="button" class="btn btn-info card-link btn-sm" (click)="updateNews(news)">
+            <i class="fas fa-pencil-alt me-2"></i>Düzenle
+          </button>
+          <button type="button" class="btn btn-danger card-link btn-sm" (click)="deleteNews(news.id)">
+            <i class="fas fa-trash me-2"></i>Sil
+          </button>
+        </div>
+      </div>
+      }
+
+    </div>
+  </div>
+</section>

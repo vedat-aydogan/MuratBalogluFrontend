@@ -1,11 +1,12 @@
 import { Component, Inject, Input, OnInit, PLATFORM_ID } from '@angular/core';
 import { SpecialityService } from '../../../../services/common/models/speciality.service';
-import { AlertifyService, MessageType, Position } from '../../../../services/admin/alertify.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { isPlatformBrowser } from '@angular/common';
 import { SpecialityModel } from '../../../../contracts/models/speciality-model';
 import { HttpErrorResponse } from '@angular/common/http';
+import { SpecialityCategoryModel } from '../../../../contracts/models/speciality-category-model';
+import { CustomToastrService, ToastrMessageType, ToastrPosition } from '../../../../services/common/custom-toastr-service';
 
 @Component({
   selector: 'app-speciality-update',
@@ -17,7 +18,7 @@ export class SpecialityUpdateComponent implements OnInit {
   constructor(
     @Inject(PLATFORM_ID) private platformId: object,
     private specialityService: SpecialityService,
-    private alertifyService: AlertifyService,
+    private toastrService: CustomToastrService,
     private spinnerService: NgxSpinnerService,
     private formbuilder: FormBuilder) {
 
@@ -48,11 +49,18 @@ export class SpecialityUpdateComponent implements OnInit {
     placeholder: 'Oluşturmak istediğiniz uzmanlık içeriğini buraya yazınız. Boş bırakılamaz!'
   }
 
+  specialityCategories: SpecialityCategoryModel[];
   specialityUpdateForm: FormGroup
+  submitted: boolean;
+
+  get component() {
+    return this.specialityUpdateForm.controls;
+  }
 
   updateSpecialityForm(): void {
     this.specialityUpdateForm = this.formbuilder.group({
       ckEditor: [this.speciality?.context, Validators.required],
+      category: [this.speciality?.categoryId, Validators.required],
       title: [this.speciality?.title, Validators.required],
       cardContext: [this.speciality?.cardContext, [
         Validators.required,
@@ -63,44 +71,41 @@ export class SpecialityUpdateComponent implements OnInit {
   }
 
   updateSpeciality() {
+    this.submitted = true;
+    if (this.specialityUpdateForm.invalid)
+      return;
+
+    this.spinnerService.show();
+
     const specialityModel: SpecialityModel = new SpecialityModel();
     specialityModel.id = this.id;
     specialityModel.title = this.specialityUpdateForm.value.title;
     specialityModel.cardContext = this.specialityUpdateForm.value.cardContext;
     specialityModel.context = this.specialityUpdateForm.value.ckEditor;
+    specialityModel.categoryId = this.specialityUpdateForm.value.category;
 
-    if (this.specialityUpdateForm.valid) {
-      this.spinnerService.show();
+    this.specialityService.updateSpeciality(specialityModel).subscribe({
+      next: (data: any) => {
+        this.spinnerService.hide();
 
-      this.specialityService.updateSpeciality(specialityModel).subscribe({
-        next: (data: any) => {
+        this.toastrService.message("Güncelleme işlemi gerçekleşmiştir", "Başarılı", {
+          messageType: ToastrMessageType.Success,
+          position: ToastrPosition.TopCenter,
+          timeOut: 4000
+        });
+      },
+      error: (error: HttpErrorResponse) => {
+        if ((error.status != 401) && (error.status != 403) && (error.status != 500)) {
           this.spinnerService.hide();
 
-          this.alertifyService.message("Uzmanlık başarılı bir şekilde güncellenmiştir.", {
-            dismissOthers: true,
-            messageType: MessageType.Success,
-            position: Position.TopRight
-          });
-        },
-        error: (error: HttpErrorResponse) => {
-          this.spinnerService.hide();
-
-          this.alertifyService.message(error.error, {
-            dismissOthers: true,
-            messageType: MessageType.Error,
-            position: Position.TopRight
+          this.toastrService.message(error.error.message, "Hata!", {
+            messageType: ToastrMessageType.Error,
+            position: ToastrPosition.TopCenter,
+            timeOut: 4000
           });
         }
-      });
-    }
-    else {
-      this.alertifyService.message("Hiç bir alan boş bırakılamaz ve uzmanlık kartı içeriği en az 150, en fazla 200 karakter olmalıdır.", {
-        dismissOthers: true,
-        messageType: MessageType.Error,
-        position: Position.TopCenter,
-        delay: 7
-      });
-    }
+      }
+    });
 
   }
 
@@ -111,18 +116,40 @@ export class SpecialityUpdateComponent implements OnInit {
         this.updateSpecialityForm();
       },
       error: (error: HttpErrorResponse) => {
-        this.alertifyService.message(error.error, {
-          dismissOthers: true,
-          messageType: MessageType.Error,
-          position: Position.TopRight
+        this.toastrService.message(error.error.message, "Hata!", {
+          messageType: ToastrMessageType.Error,
+          position: ToastrPosition.TopCenter,
+          timeOut: 4000
         });
       }
+    });
+  }
+
+  getSpecialityCategories() {
+    this.spinnerService.show();
+
+    this.specialityService.getSpecialityCategories().subscribe({
+      next: (data: SpecialityCategoryModel[]) => {
+        this.specialityCategories = data;
+
+        this.spinnerService.hide();
+      },
+      error: (error: HttpErrorResponse) => {
+        this.spinnerService.hide();
+
+        this.toastrService.message(error.error.message, "Hata!", {
+          messageType: ToastrMessageType.Error,
+          position: ToastrPosition.TopCenter,
+          timeOut: 4000
+        });
+      },
     });
   }
 
   ngOnInit(): void {
     this.updateSpecialityForm();
     this.getSpecialityById(this.id);
+    this.getSpecialityCategories();
   }
 
 }

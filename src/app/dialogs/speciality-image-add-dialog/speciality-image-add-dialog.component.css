@@ -14,3 +14,7 @@
   background-color: #b0bec5 !important;
   color: #000000 !important;
 }
+
+button {
+  margin-right: 18px;
+}

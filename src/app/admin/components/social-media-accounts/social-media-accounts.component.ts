@@ -3,9 +3,9 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { SocialMediaAccountAddModel } from '../../../contracts/models/social-media-account-add-model';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SocialMediaAccountService } from '../../../services/common/models/social-media-account.service';
-import { AlertifyService, MessageType, Position } from '../../../services/admin/alertify.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { SocialMediaAccountModel } from '../../../contracts/models/social-media-account-model';
+import { CustomToastrService, ToastrMessageType, ToastrPosition } from '../../../services/common/custom-toastr-service';
 
 @Component({
   selector: 'app-social-media-accounts',
@@ -17,7 +17,7 @@ export class SocialMediaAccountsComponent implements OnInit {
   constructor(private formbuilder: FormBuilder,
     private spinnerService: NgxSpinnerService,
     private socialMediaAccountService: SocialMediaAccountService,
-    private alertifyService: AlertifyService) { }
+    private toastrService: CustomToastrService) { }
 
   socialMediaAccountsForm: FormGroup;
 
@@ -48,29 +48,30 @@ export class SocialMediaAccountsComponent implements OnInit {
 
           this.socialMediaAccountsForm.setValue(data);
 
-          this.alertifyService.message("Sosyal medya hesapları başarılı bir şekilde eklenmiştir.", {
-            dismissOthers: true,
-            messageType: MessageType.Success,
-            position: Position.TopRight
+          this.toastrService.message("Yükleme işlemi gerçekleşmiştir", "Başarılı", {
+            messageType: ToastrMessageType.Success,
+            position: ToastrPosition.TopCenter,
+            timeOut: 4000
           });
         },
         error: (error: HttpErrorResponse) => {
-          this.spinnerService.hide();
+          if ((error.status != 401) && (error.status != 403) && (error.status != 500)) {
+            this.spinnerService.hide();
 
-          this.alertifyService.message(error.error, {
-            dismissOthers: true,
-            messageType: MessageType.Error,
-            position: Position.TopRight
-          });
+            this.toastrService.message(error.error.message, "Hata!", {
+              messageType: ToastrMessageType.Error,
+              position: ToastrPosition.TopCenter,
+              timeOut: 4000
+            });
+          }
         }
       });
     }
     else {
-      this.alertifyService.message("Sosyal medya hesapları formu valid değil ...", {
-        dismissOthers: true,
-        messageType: MessageType.Error,
-        position: Position.TopCenter,
-        delay: 5
+      this.toastrService.message("Sosyal medya hesapları formu valid değil ...", "Hata!", {
+        messageType: ToastrMessageType.Error,
+        position: ToastrPosition.TopCenter,
+        timeOut: 4000
       });
     }
   }
@@ -89,10 +90,10 @@ export class SocialMediaAccountsComponent implements OnInit {
       error: (error: HttpErrorResponse) => {
         this.spinnerService.hide();
 
-        this.alertifyService.message(error.error, {
-          dismissOthers: true,
-          messageType: MessageType.Error,
-          position: Position.TopRight
+        this.toastrService.message(error.error.message, "Hata!", {
+          messageType: ToastrMessageType.Error,
+          position: ToastrPosition.TopCenter,
+          timeOut: 4000
         });
       }
     });

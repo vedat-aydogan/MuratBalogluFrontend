@@ -1,39 +1,56 @@
 <!-- Content Header (Page header) -->
 <div class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1 class="m-0">Hakkında > Anasayfa Hakkında Ekle / Güncelle</h1>
-            </div><!-- /.col -->
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a routerLink="/admin">Anasayfa</a></li>
-                    <li class="breadcrumb-item active">Hakkında > Anasayfa Hakkında Ekle / Güncelle</li>
-                </ol>
-            </div><!-- /.col -->
-        </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1 class="m-0">Anasayfa Hakkında</h1>
+      </div><!-- /.col -->
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a routerLink="/admin">Anasayfa</a></li>
+          <li class="breadcrumb-item active">Anasayfa Hakkında</li>
+        </ol>
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
 </div>
 <!-- /.content-header -->
 <div class="card card-primary">
-    <div class="card-header">
-        <h3 class="card-title mb-0">
-            Anasayfadaki hakkında İçeriği <br>
-            (Aşağıdaki editör yardımı ile, anasayfadaki hakkında yazınızı hazırlayabilirsiniz. Yazınıza resim ekleyebilir, yazı
-            büyüklüğü ve rengi
-            gibi biçimlendirmeleri yapabilirsiniz. )
-        </h3>
-    </div>
+  <div class="card-header">
+    <h3 class="card-title mb-0">
+      Anasayfadaki hakkında İçeriği <br>
+      (Aşağıdaki editör yardımı ile, anasayfadaki hakkında yazınızı hazırlayabilirsiniz. Yazınıza resim ekleyebilir,
+      yazı
+      büyüklüğü ve rengi
+      gibi biçimlendirmeleri yapabilirsiniz. )
+    </h3>
+  </div>
 </div>
 
 <!-- form start -->
 <form [formGroup]="homeAboutMeForm" (ngSubmit)="addHomeAboutMe()">
-    <ckeditor formControlName="ckEditor" *ngIf="isBrowser" [editor]="Editor" [config]="config">
-    </ckeditor>
-    <br>
+  <ckeditor formControlName="ckEditor" *ngIf="isBrowser" [editor]="Editor" [config]="config">
+  </ckeditor>
+  <br>
 
-    <div class="col-md-4 ms-auto">
-        <button type="submit" class="btn btn-block bg-gradient-dark btn-lg">Kaydet</button>
-    </div>
+  <div class="col-md-4 ms-auto">
+    <button type="submit" class="btn btn-block bg-gradient-dark btn-lg">Kaydet</button>
+  </div>
+  <br>
 </form>
 <!-- </form> -->
+
+<div class="card card-primary card-outline">
+  <div class="card-header">
+    <h3 class="m-0 mb-2">Anasayfa Hakkında Resmi Ekle Yada Değiştir</h3>
+    <div class="alert alert-info py-2" style="font-size:18px; line-height: 26px;">
+      *** Anasayfadaki hakkında kısmında gösterilecek olan hakkında resimi için ideal ölçüler 400px / 550px dir. <br>
+      hakkında resminin en uygun şekilde gösterilebilmesi için otomatik olarak konumlandırma yapılmaktadır.
+      Bu yüzden ideal ölçülere yakın ölçüler de kullanılabilir.
+    </div>
+  </div>
+  <div class="card-body">
+    <app-file-upload [options]="fileUploadOptions"></app-file-upload>
+  </div>
+</div>
+<!-- /.card -->

@@ -12,9 +12,14 @@
           HIZLI BAĞLANTILAR
         </div>
         <ul class="footer-menu-list">
-          <li *ngFor="let titleAndDetailUrl of titleAndDetailUrlList">
+          <!-- <li *ngFor="let titleAndDetailUrl of titleAndDetailUrlList">
             <a routerLink="/uzmanlik/{{titleAndDetailUrl.detailUrl}}">{{titleAndDetailUrl.title}}</a>
+          </li> -->
+          @for (specialityCategory of specialityCategories; track specialityCategory) {
+          <li routerLink="uzmanliklari/{{specialityCategory.categoryUrl}}">
+            <a routerLink="uzmanliklari">{{specialityCategory.name}}</a>
           </li>
+          }
           <li><a routerLink="hasta-yorumlari">Yorumlar</a></li>
           <li><a routerLink="videolar">Videolar</a></li>
           <li><a routerLink="iletisim">İletişim</a></li>

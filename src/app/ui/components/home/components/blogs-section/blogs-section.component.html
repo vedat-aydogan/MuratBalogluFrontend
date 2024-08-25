@@ -24,8 +24,9 @@
             <img src="assets/images/no-image.jpg" alt={{blog.title}}>
             }
           </div>
-          <div class="blog-date"><i class="fa-solid fa-calendar-days"></i> {{blog.createdDate | date:
-            "dd.MM.YYYY"}}
+          <div class="blog-date">
+            <i class="fa-solid fa-calendar-days"></i>
+            {{blog.createdDate | date: "dd.MM.YYYY"}}
           </div>
           <div class="blog-card-title">{{blog.title}}</div>
           <div class="blog-card-desc">{{blog.cardContext}}...</div>

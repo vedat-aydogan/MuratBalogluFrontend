@@ -1,0 +1,28 @@
+<h2 mat-dialog-title>{{data.fullName}} Kullanıcısına Rol Atama</h2>
+
+<mat-dialog-content>
+  <!-- <div matBadge={{selectionRoleList.selectedOptions.selected.length}} matBadgeOverlap="false" class="demo-section">
+    {{data.fullName}} Kullanıcısına aşağıdan rolleri atayabilirsiniz.
+  </div> -->
+  <p>{{data.fullName}} Kullanıcısına aşağıdan rolleri atayabilirsiniz.</p>
+
+  <mat-selection-list #selectionRoleList>
+    @for (role of roles; track role) {
+    <!-- <mat-list-option value="{{role.name}}">{{role.name}}</mat-list-option> -->
+    <mat-list-option [value]="role.name" [selected]="isRoleSelected(role.name)">
+      {{role.name}}
+    </mat-list-option>
+    }
+  </mat-selection-list>
+
+  <p>
+    <!-- Options selected: {{roles.selectedOptions.selected.length}} -->
+  </p>
+</mat-dialog-content>
+
+<mat-dialog-actions class="user-menu-dialog-button-row">
+  <button mat-raised-button mat-dialog-close color="accent">İptal</button>
+  <button mat-raised-button mat-dialog-close cdkFocusInitial color="primary" (click)="assignRoles(selectionRoleList)">
+    Rol / Rolleri Ata
+  </button>
+</mat-dialog-actions>

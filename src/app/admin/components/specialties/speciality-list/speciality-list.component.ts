@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { SpecialityService } from '../../../../services/common/models/speciality.service';
-import { AlertifyService, MessageType, Position } from '../../../../services/admin/alertify.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MatDialog } from '@angular/material/dialog';
 import { SpecialityModel } from '../../../../contracts/models/speciality-model';
@@ -9,6 +8,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { DeleteDialogComponent, DeleteState } from '../../../../dialogs/delete-dialog/delete-dialog.component';
 import { SpecialityImageAddDialogComponent } from '../../../../dialogs/speciality-image-add-dialog/speciality-image-add-dialog.component';
 import { SpecialityImageListDialogComponent } from '../../../../dialogs/speciality-image-list-dialog/speciality-image-list-dialog.component';
+import { SpecialityCategoryModel } from '../../../../contracts/models/speciality-category-model';
+import { CustomToastrService, ToastrMessageType, ToastrPosition } from '../../../../services/common/custom-toastr-service';
 
 @Component({
   selector: 'app-speciality-list',
@@ -19,13 +20,15 @@ export class SpecialityListComponent implements OnInit {
 
   constructor(
     private specialityService: SpecialityService,
-    private alertifyService: AlertifyService,
+    private toastrService: CustomToastrService,
     private spinnerService: NgxSpinnerService,
     public dialog: MatDialog
   ) { }
 
   specialties: SpecialityModel[];
   specialityWithCardImage: SpecialityWithCardImageModel[];
+  specialityCategories: SpecialityCategoryModel[];
+  categoryId: string = null;
 
   addSpecialityImage(id: string, title: string): void {
     const dialogRef = this.dialog.open(SpecialityImageAddDialogComponent, {
@@ -51,10 +54,10 @@ export class SpecialityListComponent implements OnInit {
       error: (error: HttpErrorResponse) => {
         this.spinnerService.hide();
 
-        this.alertifyService.message(error.error, {
-          dismissOthers: true,
-          messageType: MessageType.Error,
-          position: Position.TopRight
+        this.toastrService.message(error.error, "Hata!", {
+          messageType: ToastrMessageType.Error,
+          position: ToastrPosition.TopCenter,
+          timeOut: 4000
         });
       },
     });
@@ -72,13 +75,41 @@ export class SpecialityListComponent implements OnInit {
       error: (error: HttpErrorResponse) => {
         this.spinnerService.hide();
 
-        this.alertifyService.message(error.error, {
-          dismissOthers: true,
-          messageType: MessageType.Error,
-          position: Position.TopRight
+        this.toastrService.message(error.error.message, "Hata!", {
+          messageType: ToastrMessageType.Error,
+          position: ToastrPosition.TopCenter,
+          timeOut: 4000
         });
       },
     });
+  }
+
+  getSpecialtiesByCategoryIdWithCardImage(categoryId: string) {
+    this.spinnerService.show();
+
+    this.specialityService.getSpecialtiesByCategoryIdWithCardImage(categoryId).subscribe({
+      next: (data: SpecialityWithCardImageModel[]) => {
+        this.specialityWithCardImage = data;
+
+        this.spinnerService.hide();
+      },
+      error: (error: HttpErrorResponse) => {
+        this.spinnerService.hide();
+
+        this.toastrService.message(error.error.message, "Hata!", {
+          messageType: ToastrMessageType.Error,
+          position: ToastrPosition.TopCenter,
+          timeOut: 4000
+        });
+      },
+    });
+  }
+
+  getSpecialtiesByCategory(categoryId: string) {
+    if (categoryId)
+      this.getSpecialtiesByCategoryIdWithCardImage(categoryId);
+    else
+      this.getSpecialtiesWithCardImage();
   }
 
   deleteSpeciality(id: string) {
@@ -90,21 +121,28 @@ export class SpecialityListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
 
       if (result == DeleteState.Yes) {
+        this.spinnerService.show();
         this.specialityService.deleteSpeciality(id).subscribe({
           next: (data: any) => {
-            this.alertifyService.message("Silme işlemi başarı ile gerçekleşmiştir.", {
-              dismissOthers: true,
-              messageType: MessageType.Success,
-              position: Position.TopRight
+            this.spinnerService.hide();
+
+            this.toastrService.message("Silme işlemi gerçekleşmiştir", "Başarılı", {
+              messageType: ToastrMessageType.Success,
+              position: ToastrPosition.TopCenter,
+              timeOut: 4000
             });
             this.getSpecialtiesWithCardImage();
           },
           error: (error: HttpErrorResponse) => {
-            this.alertifyService.message(error.error, {
-              dismissOthers: true,
-              messageType: MessageType.Error,
-              position: Position.TopRight
-            });
+            if ((error.status != 401) && (error.status != 403) && (error.status != 500)) {
+              this.spinnerService.hide();
+
+              this.toastrService.message(error.error.message, "Hata!", {
+                messageType: ToastrMessageType.Error,
+                position: ToastrPosition.TopCenter,
+                timeOut: 4000
+              });
+            }
           }
         });
       }
@@ -113,33 +151,30 @@ export class SpecialityListComponent implements OnInit {
 
   }
 
-  //SpecialityModel parametereden gonderilecek.
-  updateSpeciality() {
-    const specialityModel: SpecialityModel = new SpecialityModel();
-    specialityModel.id = "954C61E2-82FC-4A9B-7AA4-08DC0FC9C2F2"
-    specialityModel.title = "Title 6";
-    specialityModel.context = "Context 6";
+  getSpecialityCategories() {
+    this.spinnerService.show();
 
-    this.specialityService.updateSpeciality(specialityModel).subscribe({
-      next: (data: any) => {
-        this.alertifyService.message("Başarı ile güncellenmiştir.", {
-          dismissOthers: true,
-          messageType: MessageType.Success,
-          position: Position.TopRight
-        });
+    this.specialityService.getSpecialityCategories().subscribe({
+      next: (data: SpecialityCategoryModel[]) => {
+        this.specialityCategories = data;
+
+        this.spinnerService.hide();
       },
       error: (error: HttpErrorResponse) => {
-        this.alertifyService.message(error.message, {
-          dismissOthers: true,
-          messageType: MessageType.Error,
-          position: Position.TopRight
+        this.spinnerService.hide();
+
+        this.toastrService.message(error.error.message, "Hata!", {
+          messageType: ToastrMessageType.Error,
+          position: ToastrPosition.TopCenter,
+          timeOut: 4000
         });
-      }
+      },
     });
   }
 
   ngOnInit(): void {
     this.getSpecialtiesWithCardImage();
+    this.getSpecialityCategories();
   }
 
 }

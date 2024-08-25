@@ -7,14 +7,19 @@
           UZMANLIKLARI
         </div>
         <div class="section-sub-title">
+          @if (categoryUrl) {
+          {{categoryName}}
+          }@else {
           Tüm Uzmanlık Alanları
+          }
         </div>
       </div>
     </div>
 
     <div class="row mt-5">
       <!-- CARD ITEM -->
-      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4" *ngFor="let speciality of specialityWithCardImage">
+      @for (speciality of specialtiesWithCardImage; track speciality) {
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
         <a class="spc-card" routerLink="/uzmanlik/{{speciality.detailUrl}}">
           <div class="spc-card-img">
             @if (speciality.specialityImageFileId) {
@@ -30,6 +35,7 @@
           </div>
         </a>
       </div>
+      }
     </div>
 
   </div>

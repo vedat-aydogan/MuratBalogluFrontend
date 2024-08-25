@@ -3,9 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ContactAddModel } from '../../../contracts/models/contact-add-model';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ContactService } from '../../../services/common/models/contact.service';
-import { AlertifyService, MessageType, Position } from '../../../services/admin/alertify.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ContactModel } from '../../../contracts/models/contact-model';
+import { CustomToastrService, ToastrMessageType, ToastrPosition } from '../../../services/common/custom-toastr-service';
 
 @Component({
   selector: 'app-admin-contact',
@@ -17,7 +17,7 @@ export class ContactComponent implements OnInit {
   constructor(private formbuilder: FormBuilder,
     private contactService: ContactService,
     private spinnerService: NgxSpinnerService,
-    private alertifyService: AlertifyService) { }
+    private toastrService: CustomToastrService) { }
 
   contactForm: FormGroup;
 
@@ -61,39 +61,39 @@ export class ContactComponent implements OnInit {
 
           this.contactForm.setValue(data);
 
-          this.alertifyService.message("İletişim bilgileri başarılı bir şekilde eklenmiştir.", {
-            dismissOthers: true,
-            messageType: MessageType.Success,
-            position: Position.TopRight
+          this.toastrService.message("Yükleme işlemi gerçekleşmiştir", "Başarılı", {
+            messageType: ToastrMessageType.Success,
+            position: ToastrPosition.TopCenter,
+            timeOut: 4000
           });
         },
         error: (error: HttpErrorResponse) => {
-          this.spinnerService.hide();
+          if ((error.status != 401) && (error.status != 403) && (error.status != 500)) {
+            this.spinnerService.hide();
 
-          this.alertifyService.message(error.error, {
-            dismissOthers: true,
-            messageType: MessageType.Error,
-            position: Position.TopRight
-          });
+            this.toastrService.message(error.error.message, "Hata!", {
+              messageType: ToastrMessageType.Error,
+              position: ToastrPosition.TopCenter,
+              timeOut: 4000
+            });
+          }
         }
       });
     }
     else {
       if (this.email.errors) {
-        this.alertifyService.message("e-mail format hatası !", {
-          dismissOthers: true,
-          messageType: MessageType.Error,
-          position: Position.TopCenter,
-          delay: 5
+        this.toastrService.message("e-mail format hatası !", "Hata!", {
+          messageType: ToastrMessageType.Error,
+          position: ToastrPosition.TopCenter,
+          timeOut: 4000
         });
       }
 
       if (this.mobile.errors) {
-        this.alertifyService.message("cep telefonu format hatası ! Format; 533 333 22 11 şeklinde olmalı.", {
-          dismissOthers: true,
-          messageType: MessageType.Error,
-          position: Position.TopCenter,
-          delay: 5
+        this.toastrService.message("Format; 533 333 22 11 şeklinde olmalı.", "Cep telefonu format hatası !", {
+          messageType: ToastrMessageType.Error,
+          position: ToastrPosition.TopCenter,
+          timeOut: 4000
         });
       }
     }
@@ -113,10 +113,10 @@ export class ContactComponent implements OnInit {
       error: (error: HttpErrorResponse) => {
         this.spinnerService.hide();
 
-        this.alertifyService.message(error.error, {
-          dismissOthers: true,
-          messageType: MessageType.Error,
-          position: Position.TopRight
+        this.toastrService.message(error.error.message, "Hata!", {
+          messageType: ToastrMessageType.Error,
+          position: ToastrPosition.TopCenter,
+          timeOut: 4000
         });
       }
     });

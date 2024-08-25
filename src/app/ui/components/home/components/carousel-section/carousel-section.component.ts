@@ -3,6 +3,8 @@ import { HomeService } from '../../../../../services/common/models/home.service'
 import { CarouselImageModel } from '../../../../../contracts/models/carousel-image-model';
 import { HttpErrorResponse } from '@angular/common/http';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { firstValueFrom, Observable } from 'rxjs';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 declare var $: any;
 
@@ -13,7 +15,7 @@ declare var $: any;
 })
 export class CarouselSectionComponent implements OnInit {
 
-  constructor(private homeService: HomeService) { }
+  constructor(private homeService: HomeService, private spinnerService: NgxSpinnerService) { }
 
   carouselImages: CarouselImageModel[];
   // carouselImagesCount: number;
@@ -62,8 +64,25 @@ export class CarouselSectionComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.getCarouselImages();
+  async getCarouselImagesAsync(): Promise<any> {
+    this.spinnerService.show();
+
+    const observable: Observable<CarouselImageModel[]> = this.homeService.getCarouselImages();
+
+    await firstValueFrom(observable)
+      .then((data) => {
+        this.carouselImages = data;
+        this.spinnerService.hide();
+      })
+      .catch((error: HttpErrorResponse) => { this.spinnerService.hide(); error });
+  }
+
+  // ngOnInit(): void {
+  //   this.getCarouselImages();
+  // }
+
+  async ngOnInit(): Promise<void> {
+    await this.getCarouselImagesAsync();
   }
 
 }

@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { WorkingHourService } from '../../../services/common/models/working-hour.service';
-import { AlertifyService, MessageType, Position } from '../../../services/admin/alertify.service';
 import { WorkingHourAddModel } from '../../../contracts/models/working-hour-add-model';
 import { HttpErrorResponse } from '@angular/common/http';
 import { WorkingHourModel } from '../../../contracts/models/working-hour-model';
+import { CustomToastrService, ToastrMessageType, ToastrPosition } from '../../../services/common/custom-toastr-service';
 
 @Component({
   selector: 'app-working-hours',
@@ -17,7 +17,7 @@ export class WorkingHoursComponent implements OnInit {
   constructor(private formbuilder: FormBuilder,
     private spinnerService: NgxSpinnerService,
     private workingHourService: WorkingHourService,
-    private alertifyService: AlertifyService) { }
+    private toastrService: CustomToastrService) { }
 
   workingHoursForm: FormGroup;
 
@@ -52,29 +52,30 @@ export class WorkingHoursComponent implements OnInit {
 
           this.workingHoursForm.setValue(data);
 
-          this.alertifyService.message("Çalışma saatleri başarılı bir şekilde eklenmiştir.", {
-            dismissOthers: true,
-            messageType: MessageType.Success,
-            position: Position.TopRight
+          this.toastrService.message("Yükleme işlemi gerçekleşmiştir", "Başarılı", {
+            messageType: ToastrMessageType.Success,
+            position: ToastrPosition.TopCenter,
+            timeOut: 4000
           });
         },
         error: (error: HttpErrorResponse) => {
-          this.spinnerService.hide();
+          if ((error.status != 401) && (error.status != 403) && (error.status != 500)) {
+            this.spinnerService.hide();
 
-          this.alertifyService.message(error.error, {
-            dismissOthers: true,
-            messageType: MessageType.Error,
-            position: Position.TopRight
-          });
+            this.toastrService.message(error.error.message, "Hata!", {
+              messageType: ToastrMessageType.Error,
+              position: ToastrPosition.TopCenter,
+              timeOut: 4000
+            });
+          }
         }
       });
     }
     else {
-      this.alertifyService.message("Çalışma saatleri formu valid değil ...", {
-        dismissOthers: true,
-        messageType: MessageType.Error,
-        position: Position.TopCenter,
-        delay: 5
+      this.toastrService.message("Çalışma saatleri formu valid değil ...", "Hata!", {
+        messageType: ToastrMessageType.Error,
+        position: ToastrPosition.TopCenter,
+        timeOut: 4000
       });
     }
   }
@@ -93,10 +94,10 @@ export class WorkingHoursComponent implements OnInit {
       error: (error: HttpErrorResponse) => {
         this.spinnerService.hide();
 
-        this.alertifyService.message(error.error, {
-          dismissOthers: true,
-          messageType: MessageType.Error,
-          position: Position.TopRight
+        this.toastrService.message(error.error.message, "Hata!", {
+          messageType: ToastrMessageType.Error,
+          position: ToastrPosition.TopCenter,
+          timeOut: 4000
         });
       }
     });

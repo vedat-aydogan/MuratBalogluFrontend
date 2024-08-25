@@ -1,0 +1,36 @@
+<section class="blog">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="section-sub-main-title">
+          HABERLER
+        </div>
+        <div class="section-sub-title">
+          BASINDA BİZ
+        </div>
+      </div>
+    </div>
+    <div class="row mt-5">
+      @for (news of newsWithCardImageList; track news) {
+      <!-- CARD ITEM -->
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+        <div class="blog-card">
+          <a [href]="news?.link" target="_blank" target="_blank">
+            <div class="blog-card-img">
+              @if (news.newsImageFileId) {
+              <img src={{news.path}} alt={{news.title}}>
+              }@else {
+              <img src="assets/images/no-image.jpg" alt={{news.title}}>
+              }
+            </div>
+            <div class="blog-date"><i class="fa-solid fa-calendar-days"></i> {{news.createdDate | date:
+              "dd.MM.YYYY"}}
+            </div>
+            <div class="blog-card-title">{{news.title}}</div>
+          </a>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+</section>

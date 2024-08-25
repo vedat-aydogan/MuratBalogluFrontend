@@ -9,6 +9,7 @@ import { DialogsModule } from '../../../dialogs/dialogs.module';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { SpecialityUpdateComponent } from './speciality-update/speciality-update.component';
+import { SpecialityCategoriesComponent } from './speciality-categories/speciality-categories.component';
 
 
 
@@ -16,7 +17,8 @@ import { SpecialityUpdateComponent } from './speciality-update/speciality-update
   declarations: [
     SpecialityAddComponent,
     SpecialityListComponent,
-    SpecialityUpdateComponent
+    SpecialityUpdateComponent,
+    SpecialityCategoriesComponent
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,16 @@
+.mat-mdc-dialog-content {
+  padding: 20px 24px 20px 24px !important
+}
+
+button {
+  margin-right: 24px;
+  margin-bottom: 20px;
+}
+
+::ng-deep .mat-mdc-dialog-container .mdc-dialog__title {
+  color: #fff !important;
+}
+
+::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
+  background-color: #343a40;
+}

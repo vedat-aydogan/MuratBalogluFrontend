@@ -28,37 +28,37 @@
     display: none !important;
 }
 
-
-
-
-.collapse-btn{
-    color:white!important;
+.collapse-btn {
+    color: white !important;
     position: relative;
-    cursor:pointer
+    cursor: pointer
 }
-.collapse-btn h5{
+
+.collapse-btn h5 {
     line-height: 30px;
 }
 
 .collapse-btn[data-toggle].collapsed:after {
-    font-family: "Font Awesome 5 Free"; 
-    font-weight: 900; 
-    content: "\f077"; 
-    color:  #fff;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f077";
+    color: #fff;
     position: absolute;
     right: 20px;
-    top:15px;
+    top: 15px;
 }
-.collapse-btn[data-toggle]:not(.collapsed):after {
-    font-family: "Font Awesome 5 Free"; 
-    font-weight: 900; 
-    content: "\f078"; 
 
-    color:  #fff;
+.collapse-btn[data-toggle]:not(.collapsed):after {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f078";
+
+    color: #fff;
     position: absolute;
     right: 20px;
-    top:15px;
+    top: 15px;
 }
+
 @media (min-width:768px) and (max-width:992px) {
     .video-card iframe {
         min-height: 200px;

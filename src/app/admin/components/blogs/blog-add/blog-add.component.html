@@ -1,83 +1,98 @@
 <!-- Content Header (Page header) -->
 <div class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1 class="m-0">Bloglar > Blog Ekle</h1>
-            </div><!-- /.col -->
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a routerLink="/admin">Anasayfa</a></li>
-                    <li class="breadcrumb-item active">Bloglar > Blog Ekle</li>
-                </ol>
-            </div><!-- /.col -->
-        </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1 class="m-0">Blog Ekle</h1>
+      </div><!-- /.col -->
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a routerLink="/admin">Anasayfa</a></li>
+          <li class="breadcrumb-item active">Blog Ekle</li>
+        </ol>
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
 </div>
 <!-- /.content-header -->
 <div class="card card-primary">
-    <div class="card-header">
-        <h3 class="card-title mb-0">
-            Blog İçeriği <br>
-            (Aşağıdaki editör yardımı ile, blog yazınızı hazırlayabilirsiniz. Blog yazınıza resim ekleyebilir, yazı
-            büyüklüğü ve rengi
-            gibi biçimlendirmeleri yapabilirsiniz. )
-        </h3>
-    </div>
+  <div class="card-header">
+    <h3 class="card-title mb-0">
+      Blog İçeriği <br>
+      *** Yüklenecek içerik resimleri için ideal ölçüler 800px / 357px yada 900px / 402px dir. İdeal ölçülere yakın
+      ölçüler de kullanılabilir.<br>
+      (Aşağıdaki editör yardımı ile, blog yazınızı hazırlayabilirsiniz. Blog yazınıza resim ekleyebilir, yazı
+      büyüklüğü ve rengi
+      gibi biçimlendirmeleri yapabilirsiniz. )
+    </h3>
+  </div>
 </div>
 <!-- <ckeditor *ngIf="isBrowser" [(ngModel)]="model.editorData" [editor]="Editor" [disabled]="isDisabled" [config]="config"></ckeditor> -->
 
 <form [formGroup]="blogForm" (ngSubmit)="addBlog()">
-    <ckeditor height="600" formControlName="ckEditor" *ngIf="isBrowser" [editor]="Editor" [config]="config">
-    </ckeditor>
-    <br>
+  <ckeditor height="600" formControlName="ckEditor" *ngIf="isBrowser" [editor]="Editor" [config]="config">
+  </ckeditor>
+  <br>
 
-    <!-- left column -->
-    <div class="col-md-12">
-        <!-- general form elements -->
-        <div class="card card-primary">
-            <div class="card-header">
-                <h3 class="card-title mb-0">
-                    Blog Kartı (Özet Bilgi)<br>
-                    (Aşağıdaki alandan, hazırladığınız blog içeriğine ait, özet bilgiler içeren bir kart oluşturmanız
-                    gerekmektedir. Bu kartlar "Anasayfa" ve "Blog Yazılarım"
-                    sayfalarındaki kısa bilgiler içeren kartlardır.)
-                </h3>
-            </div>
-            <!-- /.card-header -->
-            <!-- form start -->
-            <!-- <form> -->
-            <div class="card-body">
-                <div class="form-group">
-                    <!-- <label for="exampleInputFile">File input</label>
+  <!-- left column -->
+  <div class="col-md-12">
+    <!-- general form elements -->
+    <div class="card card-primary">
+      <div class="card-header">
+        <h3 class="card-title mb-0">
+          Blog Kartı (Özet Bilgi)<br>
+          (Aşağıdaki alandan, hazırladığınız blog içeriğine ait, özet bilgiler içeren bir kart oluşturmanız
+          gerekmektedir. Bu kartlar "Anasayfa" ve "Blog Yazılarım"
+          sayfalarındaki kısa bilgiler içeren kartlardır.)
+        </h3>
+      </div>
+      <!-- /.card-header -->
+      <!-- form start -->
+      <!-- <form> -->
+      <div class="card-body">
+        <div class="form-group">
+          <!-- <label for="exampleInputFile">File input</label>
                     <input class="form-control" type="file" id="formFile"> -->
-                    <!-- <app-file-upload [options]="fileUploadOptions"></app-file-upload> -->
-                </div>
-                <div class="form-group">
-                    <label style="font-size:18px">Blog Kart Başlığı</label>
-                    <input type="text" class="form-control" formControlName="title"
-                        placeholder="Blog kartı için başlık giriniz. Boş bırakılamaz ...">
-                </div>
-                <div class="form-group mt-3">
-                    <label style="font-size:18px">Blog Kart Özeti</label>
-                    <textarea class="form-control" formControlName="cardContext" rows="8"
-                        placeholder="Blog kartı içeriği en az 150, en fazla 200 karakter olmalıdır. Blok içeriğinin ilk paragrafından kopyala-yapıştır yapılabilir ...">
+          <!-- <app-file-upload [options]="fileUploadOptions"></app-file-upload> -->
+        </div>
+        <div class="form-group">
+          <label style="font-size:18px">Blog Kart Başlığı</label>
+          <input type="text" class="form-control" formControlName="title"
+            placeholder="Blog kartı için başlık giriniz. Boş bırakılamaz ..."
+            [ngClass]="{'is-invalid':submitted && component.title.errors}">
+          <small class="invalid-feedback" *ngIf="submitted && component.title.errors?.required">
+            Blog kartı için başlık giriniz.
+          </small>
+        </div>
+        <div class="form-group mt-3">
+          <label style="font-size:18px">Blog Kart Özeti</label>
+          <textarea class="form-control" formControlName="cardContext" rows="8"
+            placeholder="Blog kartı içeriği en az 150, en fazla 200 karakter olmalıdır. Blok içeriğinin ilk paragrafından kopyala-yapıştır yapılabilir ..."
+            [ngClass]="{'is-invalid':submitted && component.cardContext.errors}">
                     </textarea>
-                </div>
-            </div>
-            <!-- /.card-body -->
+          <small class="invalid-feedback" *ngIf="submitted && component.cardContext.errors?.required">
+            Blog kart içeriği giriniz.
+          </small>
+          <small class="invalid-feedback"
+            *ngIf="submitted && (component.cardContext.errors?.minlength || component.cardContext.errors?.maxlength)">
+            Blog kartı içeriği en az 150, en fazla 200 karakter olmalıdır.
+          </small>
+        </div>
+      </div>
+      <!-- /.card-body -->
 
-            <!-- <div class="card-footer">
+      <!-- <div class="card-footer">
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div> -->
-            <!-- </form> -->
-        </div>
-        <!-- /.card -->
+      <!-- </form> -->
     </div>
-    <div class="col-md-4 ms-auto">
-        <button type="submit" class="btn btn-block bg-gradient-dark btn-lg">Kaydet</button>
-        <!-- <button type="submit" class="btn btn-primary">Gönder</button> -->
-    </div>
+    <!-- /.card -->
+  </div>
+  <div class="col-md-4 ms-auto">
+    <button type="submit" class="btn btn-block bg-gradient-dark btn-lg">Kaydet</button>
+    <!-- <button type="submit" class="btn btn-primary">Gönder</button> -->
+  </div>
+  <br>
 </form>
 
 <!-- <button (click)="toggleDisabled()">

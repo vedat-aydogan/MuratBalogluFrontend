@@ -1,35 +1,33 @@
-.video-card{
-    background-color:#fff;
-    padding:20px 20px 5px 20px;
-    border:1px solid #d4d4d4;
-    border-radius:10px;
-    margin-bottom:25px;
+.video-card {
+    background-color: #fff;
+    border: 1px solid #d4d4d4;
+    border-radius: 10px;
 }
 
-.video-card iframe{
-    height:100%!important;
-    min-height:480px!important;
-    width: 100%!important;
+.video-card iframe {
+    height: 100% !important;
+    min-height: 480px !important;
+    width: 100% !important;
 }
 
-.video-title{
+.video-title {
     font-family: "OPS Bold";
-    color:var(--dark-blue);
+    color: var(--dark-blue);
     text-align: center;
-    font-size:1rem;
+    font-size: 1rem;
     min-height: 60px;
-    line-height:20px;
+    line-height: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.ytp-title-text{
-    display: none!important;
+.ytp-title-text {
+    display: none !important;
 }
 
-@media (min-width:768px) and (max-width:992px){
-    .video-card iframe{
-        min-height:200px;
+@media (min-width:768px) and (max-width:992px) {
+    .video-card iframe {
+        min-height: 200px;
     }
 }

@@ -6,6 +6,7 @@ import { SpecialityService } from '../../../../services/common/models/speciality
 import { TitleAndDetailUrlModel } from '../../../../contracts/models/common/title-and-detail-url-model';
 import { SocialMediaAccountService } from '../../../../services/common/models/social-media-account.service';
 import { SocialMediaAccountModel } from '../../../../contracts/models/social-media-account-model';
+import { SpecialityCategoryModel } from '../../../../contracts/models/speciality-category-model';
 
 @Component({
   selector: 'app-footer',
@@ -23,7 +24,8 @@ export class FooterComponent implements OnInit {
   fixedPhoneOneWithoutSpace: string;
   fixedPhoneTwoWithoutSpace: string;
   socialMediaAccount: SocialMediaAccountModel;
-  titleAndDetailUrlList: TitleAndDetailUrlModel[];
+  // titleAndDetailUrlList: TitleAndDetailUrlModel[];
+  specialityCategories: SpecialityCategoryModel[];
 
   getContact() {
     this.contactService.getContact().subscribe({
@@ -37,10 +39,10 @@ export class FooterComponent implements OnInit {
     });
   }
 
-  getSpecialityTitlesAndDetailUrls() {
-    this.specialityService.getSpecialityTitlesAndDetailUrls().subscribe({
-      next: (data: TitleAndDetailUrlModel[]) => {
-        this.titleAndDetailUrlList = data;
+  getSpecialityCategories(): void {
+    this.specialityService.getSpecialityCategories().subscribe({
+      next: (data: SpecialityCategoryModel[]) => {
+        this.specialityCategories = data;
       },
       error: (error: HttpErrorResponse) => { }
     });
@@ -55,9 +57,19 @@ export class FooterComponent implements OnInit {
     });
   }
 
+  // getSpecialityTitlesAndDetailUrls() {
+  //   this.specialityService.getSpecialityTitlesAndDetailUrls().subscribe({
+  //     next: (data: TitleAndDetailUrlModel[]) => {
+  //       this.titleAndDetailUrlList = data;
+  //     },
+  //     error: (error: HttpErrorResponse) => { }
+  //   });
+  // }  
+
   ngOnInit(): void {
     this.getContact();
-    this.getSpecialityTitlesAndDetailUrls();
+    this.getSpecialityCategories();
+    // this.getSpecialityTitlesAndDetailUrls();
     this.getSocialMediaAccounts();
   }
 

@@ -1,12 +1,14 @@
-import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { Component, Inject, OnInit, Output, PLATFORM_ID } from '@angular/core';
 import { AboutMeService } from '../../../../services/common/models/about-me.service';
-import { AlertifyService, MessageType, Position } from '../../../../services/admin/alertify.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { isPlatformBrowser } from '@angular/common';
 import { AboutMeModel } from '../../../../contracts/models/about-me-model';
 import { AboutMeAddModel } from '../../../../contracts/models/about-me-add-model';
 import { HttpErrorResponse } from '@angular/common/http';
+import { CustomToastrService, ToastrMessageType, ToastrPosition } from '../../../../services/common/custom-toastr-service';
+import { FileUploadOptions } from '../../../../services/common/file-upload/file-upload.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-home-about-me-add',
@@ -18,9 +20,10 @@ export class HomeAboutMeAddComponent implements OnInit {
   constructor(
     @Inject(PLATFORM_ID) private platformId: object,
     private aboutMeService: AboutMeService,
-    private alertifyService: AlertifyService,
+    private toastrService: CustomToastrService,
     private spinnerService: NgxSpinnerService,
-    private formbuilder: FormBuilder) {
+    private formbuilder: FormBuilder,
+    public dialog: MatDialog) {
 
     if (isPlatformBrowser(this.platformId)) {
       import('ckeditor5-custom-build/build/ckeditor').then(e => {
@@ -30,6 +33,15 @@ export class HomeAboutMeAddComponent implements OnInit {
     }
 
   }
+
+  @Output() fileUploadOptions: Partial<FileUploadOptions> = {
+    controller: "aboutme",
+    action: "upload",
+    explanation: "Anasayfadaki hakkında kısmında gösterilecek olan hakkında resmi için resim ekleyin veya sürükleyip bırakın. ",
+    accept: ".png, .jpg, .jpeg, .gif",
+    multiple: true,
+    optionalFileName: "op-dr-murat-baloglu-hakkinda"
+  };
 
   aboutMe: AboutMeModel;
 
@@ -68,29 +80,30 @@ export class HomeAboutMeAddComponent implements OnInit {
 
           this.homeAboutMeForm.value.ckEditor = data.homeContext;
 
-          this.alertifyService.message("Anasayfadaki hakkında yazısı başarılı bir şekilde oluşturulmuştur.", {
-            dismissOthers: true,
-            messageType: MessageType.Success,
-            position: Position.TopRight
+          this.toastrService.message("Yükleme işlemi gerçekleşmiştir", "Başarılı", {
+            messageType: ToastrMessageType.Success,
+            position: ToastrPosition.TopCenter,
+            timeOut: 4000
           });
         },
         error: (error: HttpErrorResponse) => {
-          this.spinnerService.hide();
+          if ((error.status != 401) && (error.status != 403) && (error.status != 500)) {
+            this.spinnerService.hide();
 
-          this.alertifyService.message(error.error, {
-            dismissOthers: true,
-            messageType: MessageType.Error,
-            position: Position.TopRight
-          });
+            this.toastrService.message(error.error.message, "Hata!", {
+              messageType: ToastrMessageType.Error,
+              position: ToastrPosition.TopCenter,
+              timeOut: 4000
+            });
+          }
         }
       });
     }
     else {
-      this.alertifyService.message("Hakkında içeriği boş bırakılamaz.", {
-        dismissOthers: true,
-        messageType: MessageType.Error,
-        position: Position.TopCenter,
-        delay: 5
+      this.toastrService.message("Hakkında içeriği boş bırakılamaz.", "Hata!", {
+        messageType: ToastrMessageType.Error,
+        position: ToastrPosition.TopCenter,
+        timeOut: 4000
       });
     }
 
@@ -111,10 +124,10 @@ export class HomeAboutMeAddComponent implements OnInit {
       error: (error: HttpErrorResponse) => {
         this.spinnerService.hide();
 
-        this.alertifyService.message(error.error, {
-          dismissOthers: true,
-          messageType: MessageType.Error,
-          position: Position.TopRight
+        this.toastrService.message(error.error, "Hata!", {
+          messageType: ToastrMessageType.Error,
+          position: ToastrPosition.TopCenter,
+          timeOut: 4000
         });
       }
     });

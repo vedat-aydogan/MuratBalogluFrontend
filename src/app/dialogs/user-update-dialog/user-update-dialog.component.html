@@ -1,0 +1,41 @@
+<h2 mat-dialog-title>Kullanıcıyı Düzenleyiniz</h2>
+<!-- form start -->
+<form [formGroup]="userUpdateForm" (ngSubmit)="updateUser()">
+  <mat-dialog-content>
+    <div class="col-md-12">
+      <div class="card card-info">
+        <div class="card-body">
+          <div class="form-group">
+            <label>Ad</label>
+            <input type="text" class="form-control" formControlName="firstName" placeholder="Ad"
+              [ngClass]="{'is-invalid':submitted && component.firstName.errors}">
+            <small class="invalid-feedback" *ngIf="submitted && component.firstName.errors?.required">
+              Adınızı giriniz.
+            </small>
+            <small class="invalid-feedback"
+              *ngIf="submitted && (component.firstName.errors?.minlength || component.firstName.errors?.maxlength)">
+              En az 2 karaker girin
+            </small>
+          </div>
+          <div class="form-group">
+            <label>Soyad</label>
+            <input type="text" class="form-control" formControlName="lastName" placeholder="Soyad"
+              [ngClass]="{'is-invalid':submitted && component.lastName.errors}">
+            <small class="invalid-feedback" *ngIf="submitted && component.lastName.errors?.required">
+              Soyadınızı girin
+            </small>
+            <small class="invalid-feedback"
+              *ngIf="submitted && (component.lastName.errors?.minlength || component.lastName.errors?.maxlength)">
+              En az 2 karaker girin
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-raised-button color="accent" mat-dialog-close>İptal</button>
+    <button mat-raised-button color="primary" type="submit" cdkFocusInitial>Kaydet</button>
+  </mat-dialog-actions>
+</form>
+<!-- </form> -->

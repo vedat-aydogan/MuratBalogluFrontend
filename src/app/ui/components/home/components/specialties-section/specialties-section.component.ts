@@ -14,8 +14,8 @@ export class SpecialtiesSectionComponent implements OnInit {
 
   specialityWithCardImage: SpecialityWithCardImageModel[];
 
-  getSpecialtiesWithCardImage(): void {
-    this.specialityService.getSpecialtiesWithCardImage().subscribe({
+  getLastNineSpecialityWithCardImage(): void {
+    this.specialityService.getLastNineSpecialityWithCardImage().subscribe({
       next: (data: SpecialityWithCardImageModel[]) => {
         this.specialityWithCardImage = data;
       },
@@ -23,8 +23,17 @@ export class SpecialtiesSectionComponent implements OnInit {
     });
   }
 
+  // getSpecialtiesWithCardImage(): void {
+  //   this.specialityService.getSpecialtiesWithCardImage().subscribe({
+  //     next: (data: SpecialityWithCardImageModel[]) => {
+  //       this.specialityWithCardImage = data;
+  //     },
+  //     error: (error: HttpErrorResponse) => { }
+  //   });
+  // }
+
   ngOnInit(): void {
-    this.getSpecialtiesWithCardImage();
+    this.getLastNineSpecialityWithCardImage();
   }
 
 }

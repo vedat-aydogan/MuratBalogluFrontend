@@ -16,14 +16,39 @@
         <li class="nav-item">
           <a class="nav-link" aria-current="page" routerLink="hakkinda">HAKKINDA</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="uzmanliklari">UZMANLIKLARI</a>
+        <li class="nav-item dropdown">
+          <a class="nav-link  dropdown-toggle" href="javascript:void(0);" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            UZMANLIKLARI
+          </a>
+          <ul class="dropdown-menu">
+            <!-- @for (specialityCategory of specialityCategories; track specialityCategory) {
+            <li>
+              <a class="dropdown-item" routerLink="uzmanliklari/{{specialityCategory.categoryUrl}}">
+                {{specialityCategory.name}}
+              </a>
+            </li>
+            } -->
+            @for (specialityCategory of specialityCategories; track specialityCategory) {
+            <li routerLink="uzmanliklari/{{specialityCategory.categoryUrl}}">
+              <a class="dropdown-item" routerLink="uzmanliklari">
+                {{specialityCategory.name}}
+              </a>
+            </li>
+            }
+          </ul>
         </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link" routerLink="uzmanliklari">UZMANLIKLARI</a>
+        </li> -->
         <li class="nav-item">
           <a class="nav-link" routerLink="bloglar">BLOG YAZILARI</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="videolar">VİDEOLAR</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="basinda-biz">BASINDAN</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="iletisim">İLETİŞİM</a>

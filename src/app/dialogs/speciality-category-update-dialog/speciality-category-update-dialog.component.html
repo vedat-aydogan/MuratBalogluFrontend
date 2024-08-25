@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>Uzmanlık Kategorisini Düzenleyiniz</h2>
+<!-- form start -->
+<form [formGroup]="specialityCategoryUpdateForm" (ngSubmit)="updateSpecialityCategory()">
+  <mat-dialog-content>
+    <div class="col-md-12">
+      <div class="card card-info">
+        <div class="card-body">
+          <div class="form-group">
+            <label>Kategori Adı</label>
+            <input type="text" class="form-control" formControlName="name" placeholder="Frozen Shoulder / Kırık"
+              [ngClass]="{'is-invalid':submitted && component.name.errors}">
+            <small class="invalid-feedback" *ngIf="submitted && component.name.errors?.required">
+              Kategori adını giriniz
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-raised-button color="accent" mat-dialog-close>İptal</button>
+    <button mat-raised-button color="primary" type="submit" cdkFocusInitial>Kaydet</button>
+  </mat-dialog-actions>
+</form>
+<!-- </form> -->

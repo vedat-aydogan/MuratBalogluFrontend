@@ -1,0 +1,101 @@
+<!-- Content Header (Page header) -->
+<div class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1 class="m-0">Kullanıcılar</h1>
+      </div><!-- /.col -->
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a routerLink="/admin">Anasayfa</a></li>
+          <li class="breadcrumb-item active">Kullanıcılar</li>
+        </ol>
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
+</div>
+
+<!-- <div class="row"> -->
+<div class="col-12">
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">Kullanıcılar</h3>
+
+      <!-- <div class="card-tools">
+              <div class="input-group input-group-sm" style="width: 150px;">
+                <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+  
+                <div class="input-group-append">
+                  <button type="submit" class="btn btn-default">
+                    <i class="fas fa-search"></i>
+                  </button>
+                </div>
+              </div>
+            </div> -->
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body table-responsive p-0">
+      <table class="table table-hover text-nowrap">
+        <thead>
+          <tr>
+            <th>Adı Soyadı</th>
+            <th>Kullanıcı Adı</th>
+            <th>Email</th>
+            <th></th>
+            <th style="width: 40px"></th>
+            <th style="width: 40px"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (user of users; track user) {
+          <tr>
+            <td>{{user.fullName}}</td>
+            <td>{{user.userName}}</td>
+            <td>{{user.email}}</td>
+            <td>
+              @if (user.userName == "vedataydogan07@gmail.com") {
+              <button mat-raised-button color="accent">
+                Rol Ata / Atanmış Roller
+              </button>
+              }@else {
+              <button mat-raised-button color="accent" (click)="assignRole(user.id,user.fullName)">
+                Rol Ata / Atanmış Roller
+              </button>
+              }
+              <!-- <button mat-button color="primary" (click)="assignRole(user.id,user.fullName)">
+                Rol Ata / Atanmış Roller
+              </button>               -->
+            </td>
+            <td>
+              @if (user.userName == "vedataydogan07@gmail.com") {
+              <button type="button" class="btn btn-info card-link btn-sm" (click)="updateUser(user)" disabled>
+                <i class="fas fa-pencil-alt me-2"></i>Düzenle
+              </button>
+              }@else {
+              <button type="button" class="btn btn-info card-link btn-sm" (click)="updateUser(user)">
+                <i class="fas fa-pencil-alt me-2"></i>Düzenle
+              </button>
+              }
+            </td>
+            <td>
+              @if (user.userName == "vedataydogan07@gmail.com") {
+              <button type="button" class="btn btn-danger card-link btn-sm" (click)="deleteUser(user.id)" disabled>
+                <i class="fas fa-trash me-2"></i>Sil
+              </button>
+              }@else {
+              <button type="button" class="btn btn-danger card-link btn-sm" (click)="deleteUser(user.id)">
+                <i class="fas fa-trash me-2"></i>Sil
+              </button>
+              }
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    <!-- /.card-body -->
+  </div>
+  <!-- /.card -->
+</div>
+<!-- </div> -->
+<!-- /.row -->

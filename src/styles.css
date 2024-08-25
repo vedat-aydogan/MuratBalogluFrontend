@@ -167,7 +167,7 @@ body {
 
 .subpage-bg {
   margin-bottom: 28px;
-  font-size: .95rem;
+  font-size: 1rem;
   background-color: #F9F9F9;
   border: 2px solid #fff;
   padding: 40px;
@@ -435,12 +435,17 @@ body {
     /* display: flex; */
     margin: 0 auto;
   }
+
+  .main-carousel .owl-item img {
+    object-position: 95%;
+    height: 325px;
+  }
 }
 
 @media (max-width:500px) {
   .main-carousel .owl-item img {
-    object-position: center center;
-    height: 400px;
+    object-position: 95%;
+    height: 325px;
   }
 
   .navbar-brand img {

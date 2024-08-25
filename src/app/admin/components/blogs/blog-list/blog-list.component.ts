@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { BlogService } from '../../../../services/common/models/blog.service';
-import { AlertifyService, MessageType, Position } from '../../../../services/admin/alertify.service';
 import { BlogModel } from '../../../../contracts/models/blog-model';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -8,7 +7,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { BlogImageAddDialogComponent } from '../../../../dialogs/blog-image-add-dialog/blog-image-add-dialog.component';
 import { BlogWithCardImageModel } from '../../../../contracts/models/blog-with-card-image-model';
 import { DeleteDialogComponent, DeleteState } from '../../../../dialogs/delete-dialog/delete-dialog.component';
-import { BlogImageListDialogComponent } from '../../../../dialogs/blog-image-list-dialog/blog-image-list-dialog.component';
+import { _isAuthenticated } from '../../../../services/common/auth.service';
+import { CustomToastrService, ToastrMessageType, ToastrPosition } from '../../../../services/common/custom-toastr-service';
 
 @Component({
   selector: 'app-blog-list',
@@ -19,7 +19,7 @@ export class BlogListComponent implements OnInit {
 
   constructor(
     private blogService: BlogService,
-    private alertifyService: AlertifyService,
+    private toastrService: CustomToastrService,
     private spinnerService: NgxSpinnerService,
     public dialog: MatDialog
   ) { }
@@ -38,14 +38,15 @@ export class BlogListComponent implements OnInit {
     });
   }
 
-  uploadBlogImages(id: string, title: string) {
-    const dialogRef = this.dialog.open(BlogImageListDialogComponent, {
-      data: { id: id, title: title }
-    });
-  }
+  // uploadBlogImages(id: string, title: string) {
+  //   const dialogRef = this.dialog.open(BlogImageListDialogComponent, {
+  //     data: { id: id, title: title }
+  //   });
+  // }
+
+  // uploadBlogImages(id: string, title: string) { }
 
   getBlogs() {
-
     this.spinnerService.show();
 
     this.blogService.getBlogs().subscribe({
@@ -57,17 +58,16 @@ export class BlogListComponent implements OnInit {
       error: (error: HttpErrorResponse) => {
         this.spinnerService.hide();
 
-        this.alertifyService.message(error.error, {
-          dismissOthers: true,
-          messageType: MessageType.Error,
-          position: Position.TopRight
+        this.toastrService.message(error.error, "Hata!", {
+          messageType: ToastrMessageType.Error,
+          position: ToastrPosition.TopCenter,
+          timeOut: 4000
         });
       },
     });
   }
 
   getBlogsWithCardImage() {
-
     this.spinnerService.show();
 
     this.blogService.getBlogsWithCardImage().subscribe({
@@ -79,10 +79,10 @@ export class BlogListComponent implements OnInit {
       error: (error: HttpErrorResponse) => {
         this.spinnerService.hide();
 
-        this.alertifyService.message(error.error, {
-          dismissOthers: true,
-          messageType: MessageType.Error,
-          position: Position.TopRight
+        this.toastrService.message(error.error, "Hata!", {
+          messageType: ToastrMessageType.Error,
+          position: ToastrPosition.TopCenter,
+          timeOut: 4000
         });
       },
     });
@@ -97,52 +97,34 @@ export class BlogListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
 
       if (result == DeleteState.Yes) {
+        this.spinnerService.show();
         this.blogService.deleteBlog(id).subscribe({
-          next: (data: any) => {
-            this.alertifyService.message("Silme işlemi başarı ile gerçekleşmiştir.", {
-              dismissOthers: true,
-              messageType: MessageType.Success,
-              position: Position.TopRight
+          next: () => {
+            this.spinnerService.hide();
+
+            this.toastrService.message("Silme işlemi gerçekleşmiştir", "Başarılı", {
+              messageType: ToastrMessageType.Success,
+              position: ToastrPosition.TopCenter,
+              timeOut: 4000
             });
             this.getBlogsWithCardImage();
           },
           error: (error: HttpErrorResponse) => {
-            this.alertifyService.message(error.error, {
-              dismissOthers: true,
-              messageType: MessageType.Error,
-              position: Position.TopRight
-            });
+            if ((error.status != 401) && (error.status != 403) && (error.status != 500)) {
+              this.spinnerService.hide();
+
+              this.toastrService.message(error.error.message, "Hata!", {
+                messageType: ToastrMessageType.Error,
+                position: ToastrPosition.TopCenter,
+                timeOut: 4000
+              });
+            }
           }
         });
       }
 
     });
 
-  }
-
-  //BlogModel parametereden gonderilecek.
-  updateBlog() {
-    const blogModel: BlogModel = new BlogModel();
-    blogModel.id = "954C61E2-82FC-4A9B-7AA4-08DC0FC9C2F2"
-    blogModel.title = "Title 6";
-    blogModel.context = "Context 6";
-
-    this.blogService.updateBlog(blogModel).subscribe({
-      next: (data: any) => {
-        this.alertifyService.message("Başarı ile güncellenmiştir.", {
-          dismissOthers: true,
-          messageType: MessageType.Success,
-          position: Position.TopRight
-        });
-      },
-      error: (error: HttpErrorResponse) => {
-        this.alertifyService.message(error.message, {
-          dismissOthers: true,
-          messageType: MessageType.Error,
-          position: Position.TopRight
-        });
-      }
-    });
   }
 
   ngOnInit(): void {

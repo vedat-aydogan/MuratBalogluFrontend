@@ -1,3 +1,4 @@
+//Bu Component kullanılmıyor artık. HomeAboutMeAdd componente taşınmıştır.
 import { Component, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { FileUploadOptions } from '../../../../services/common/file-upload/file-upload.component';
@@ -21,3 +22,4 @@ export class AboutMeImageAddComponent {
   };
 
 }
+//Bu Component kullanılmıyor artık. HomeAboutMeAdd componente taşınmıştır.

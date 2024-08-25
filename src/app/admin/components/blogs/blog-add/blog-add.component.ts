@@ -1,11 +1,12 @@
 import { isPlatformBrowser } from '@angular/common';
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { BlogService } from '../../../../services/common/models/blog.service';
-import { AlertifyService, MessageType, Position } from '../../../../services/admin/alertify.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BlogAddModel } from '../../../../contracts/models/blog-add-model';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { _isAuthenticated } from '../../../../services/common/auth.service';
+import { CustomToastrService, ToastrMessageType, ToastrPosition } from '../../../../services/common/custom-toastr-service';
 
 @Component({
   selector: 'app-blog-add',
@@ -17,7 +18,7 @@ export class BlogAddComponent implements OnInit {
   constructor(
     @Inject(PLATFORM_ID) private platformId: object,
     private blogService: BlogService,
-    private alertifyService: AlertifyService,
+    private toastrService: CustomToastrService,
     private spinnerService: NgxSpinnerService,
     private formbuilder: FormBuilder) {
 
@@ -45,6 +46,11 @@ export class BlogAddComponent implements OnInit {
   }
 
   blogForm: FormGroup
+  submitted: boolean;
+
+  get component() {
+    return this.blogForm.controls;
+  }
 
   createBlogForm(): void {
     this.blogForm = this.formbuilder.group({
@@ -59,45 +65,42 @@ export class BlogAddComponent implements OnInit {
   }
 
   addBlog() {
+    this.submitted = true;
+    if (this.blogForm.invalid)
+      return;
+
+    this.spinnerService.show();
+
     const blogAddModel: BlogAddModel = new BlogAddModel();
     blogAddModel.title = this.blogForm.value.title;
     blogAddModel.cardContext = this.blogForm.value.cardContext;
     blogAddModel.context = this.blogForm.value.ckEditor;
 
-    if (this.blogForm.valid) {
-      this.spinnerService.show();
+    this.blogService.addBlog(blogAddModel).subscribe({
+      next: (data: any) => {
+        this.spinnerService.hide();
 
-      this.blogService.addBlog(blogAddModel).subscribe({
-        next: (data: any) => {
+        this.submitted = false;
+        this.createBlogForm();
+
+        this.toastrService.message("Yükleme işlemi gerçekleşmiştir", "Başarılı", {
+          messageType: ToastrMessageType.Success,
+          position: ToastrPosition.TopCenter,
+          timeOut: 4000
+        });
+      },
+      error: (error: HttpErrorResponse) => {
+        if ((error.status != 401) && (error.status != 403) && (error.status != 500)) {
           this.spinnerService.hide();
 
-          this.createBlogForm();
-
-          this.alertifyService.message("Blog başarılı bir şekilde ile oluşturulmuştur.", {
-            dismissOthers: true,
-            messageType: MessageType.Success,
-            position: Position.TopRight
-          });
-        },
-        error: (error: HttpErrorResponse) => {
-          this.spinnerService.hide();
-
-          this.alertifyService.message(error.error, {
-            dismissOthers: true,
-            messageType: MessageType.Error,
-            position: Position.TopRight
+          this.toastrService.message(error.error.message, "Hata!", {
+            messageType: ToastrMessageType.Error,
+            position: ToastrPosition.TopCenter,
+            timeOut: 4000
           });
         }
-      });
-    }
-    else {
-      this.alertifyService.message("Hiç bir alan boş bırakılamaz ve blog kartı içeriği en az 150, en fazla 200 karakter olmalıdır.", {
-        dismissOthers: true,
-        messageType: MessageType.Error,
-        position: Position.TopCenter,
-        delay: 7
-      });
-    }
+      }
+    });
 
   }
 

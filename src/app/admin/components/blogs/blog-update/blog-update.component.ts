@@ -1,11 +1,11 @@
 import { isPlatformBrowser } from '@angular/common';
 import { Component, Inject, Input, OnInit, PLATFORM_ID } from '@angular/core';
 import { BlogService } from '../../../../services/common/models/blog.service';
-import { AlertifyService, MessageType, Position } from '../../../../services/admin/alertify.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { BlogModel } from '../../../../contracts/models/blog-model';
+import { CustomToastrService, ToastrMessageType, ToastrPosition } from '../../../../services/common/custom-toastr-service';
 
 @Component({
   selector: 'app-blog-update',
@@ -17,7 +17,7 @@ export class BlogUpdateComponent implements OnInit {
   constructor(
     @Inject(PLATFORM_ID) private platformId: object,
     private blogService: BlogService,
-    private alertifyService: AlertifyService,
+    private toastrService: CustomToastrService,
     private spinnerService: NgxSpinnerService,
     private formbuilder: FormBuilder) {
 
@@ -49,6 +49,11 @@ export class BlogUpdateComponent implements OnInit {
   }
 
   blogUpdateForm: FormGroup
+  submitted: boolean;
+
+  get component() {
+    return this.blogUpdateForm.controls;
+  }
 
   updateBlogForm(): void {
     this.blogUpdateForm = this.formbuilder.group({
@@ -63,44 +68,40 @@ export class BlogUpdateComponent implements OnInit {
   }
 
   updateBlog() {
+    this.submitted = true;
+    if (this.blogUpdateForm.invalid)
+      return;
+
+    this.spinnerService.show();
+
     const blogModel: BlogModel = new BlogModel();
     blogModel.id = this.id;
     blogModel.title = this.blogUpdateForm.value.title;
     blogModel.cardContext = this.blogUpdateForm.value.cardContext;
     blogModel.context = this.blogUpdateForm.value.ckEditor;
 
-    if (this.blogUpdateForm.valid) {
-      this.spinnerService.show();
+    this.blogService.updateBlog(blogModel).subscribe({
+      next: (data: any) => {
+        this.spinnerService.hide();
 
-      this.blogService.updateBlog(blogModel).subscribe({
-        next: (data: any) => {
+        this.toastrService.message("Güncelleme işlemi gerçekleşmiştir", "Başarılı", {
+          messageType: ToastrMessageType.Success,
+          position: ToastrPosition.TopCenter,
+          timeOut: 4000
+        });
+      },
+      error: (error: HttpErrorResponse) => {
+        if ((error.status != 401) && (error.status != 403) && (error.status != 500)) {
           this.spinnerService.hide();
 
-          this.alertifyService.message("Blog başarılı bir şekilde ile güncellenmiştir.", {
-            dismissOthers: true,
-            messageType: MessageType.Success,
-            position: Position.TopRight
-          });
-        },
-        error: (error: HttpErrorResponse) => {
-          this.spinnerService.hide();
-
-          this.alertifyService.message(error.error, {
-            dismissOthers: true,
-            messageType: MessageType.Error,
-            position: Position.TopRight
+          this.toastrService.message(error.error.message, "Hata!", {
+            messageType: ToastrMessageType.Error,
+            position: ToastrPosition.TopCenter,
+            timeOut: 4000
           });
         }
-      });
-    }
-    else {
-      this.alertifyService.message("Hiç bir alan boş bırakılamaz ve blog kartı içeriği en az 150, en fazla 200 karakter olmalıdır.", {
-        dismissOthers: true,
-        messageType: MessageType.Error,
-        position: Position.TopCenter,
-        delay: 7
-      });
-    }
+      }
+    });
 
   }
 
@@ -111,10 +112,10 @@ export class BlogUpdateComponent implements OnInit {
         this.updateBlogForm();
       },
       error: (error: HttpErrorResponse) => {
-        this.alertifyService.message(error.error, {
-          dismissOthers: true,
-          messageType: MessageType.Error,
-          position: Position.TopRight
+        this.toastrService.message(error.error, "Hata!", {
+          messageType: ToastrMessageType.Error,
+          position: ToastrPosition.TopCenter,
+          timeOut: 4000
         });
       }
     });

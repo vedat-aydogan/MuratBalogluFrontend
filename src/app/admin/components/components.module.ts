@@ -10,6 +10,10 @@ import { SpecialtiesModule } from './specialties/specialties.module';
 import { VideosModule } from './videos/videos.module';
 import { SocialMediaAccountsModule } from './social-media-accounts/social-media-accounts.module';
 import { PatientCommentsModule } from './patient-comments/patient-comments.module';
+import { NewsModule } from './news/news.module';
+import { AuthorizeMenuModule } from './authorize-menu/authorize-menu.module';
+import { RolesModule } from './roles/roles.module';
+import { UsersModule } from './users/users.module';
 
 
 
@@ -26,7 +30,11 @@ import { PatientCommentsModule } from './patient-comments/patient-comments.modul
     SpecialtiesModule,
     VideosModule,
     SocialMediaAccountsModule,
-    PatientCommentsModule
+    PatientCommentsModule,
+    NewsModule,
+    AuthorizeMenuModule,
+    RolesModule,
+    UsersModule
   ]
 })
 export class ComponentsModule { }

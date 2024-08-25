@@ -1,0 +1,35 @@
+<h2 mat-dialog-title>Haberi Düzenleyiniz</h2>
+<!-- form start -->
+<form [formGroup]="newsUpdateForm" (ngSubmit)="updateNews()">
+  <mat-dialog-content>
+    <div class="col-md-12">
+      <div class="card card-info">
+        <div class="card-body">
+          <div class="form-group">
+            <label>Haber Başlığı</label>
+            <input type="text" class="form-control" formControlName="title"
+              placeholder="Haber için başlık giriniz. Boş bırakılamaz ..."
+              [ngClass]="{'is-invalid':submitted && component.title.errors}">
+            <small class="invalid-feedback" *ngIf="submitted && component.title.errors?.required">
+              Haber Başlığı giriniz.
+            </small>
+          </div>
+          <div class="form-group">
+            <label>Haber Linki</label>
+            <input type="text" class="form-control" formControlName="link"
+              placeholder="https://www.memorial.com.tr/doktorlar/murat-baloglu"
+              [ngClass]="{'is-invalid':submitted && component.link.errors}">
+            <small class="invalid-feedback" *ngIf="submitted && component.link.errors?.required">
+              Haber Linki giriniz.
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-raised-button color="accent" mat-dialog-close>İptal</button>
+    <button mat-raised-button color="primary" type="submit" cdkFocusInitial>Kaydet</button>
+  </mat-dialog-actions>
+</form>
+<!-- </form> -->
